@@ -12,7 +12,7 @@ public class Main
 {
     public static void main(String[] args) throws IOException {
         FileInputStream fis = new FileInputStream(new File("C:/demo/employee.xls"));
-        ExcelReader excelReader = new ExcelReader(new TvMatcher(new TvCellChecker()), fis);
+        ExcelReader excelReader = new ExcelReader(new TvMatcher(new TvCellChecker(new TvPartsPatterns())), fis);
         System.out.println(excelReader.getMainPartsRowTable().size());
 
         Map<Row, Parts> map = excelReader.getMainPartsRowTable();

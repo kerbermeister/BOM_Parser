@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 class TvMatcher implements Matcher {
+
     TvCellChecker tvCellChecker;
 
     public TvMatcher(TvCellChecker tvCellChecker) {
@@ -29,7 +30,7 @@ class TvMatcher implements Matcher {
                 } else if (cell.getStringCellValue().contains("speaker")) {
                     mainPartsMap.put(row, Parts.SPEAKER);
                     continue;
-                } else if (cell.getStringCellValue().contains("lcd")) {
+                } else if (tvCellChecker.containsLcd(cell)) {
                     mainPartsMap.put(row, Parts.LCD);
                     continue;
                 }
