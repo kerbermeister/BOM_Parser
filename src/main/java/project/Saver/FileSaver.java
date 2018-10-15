@@ -4,6 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import project.Formatters.TextFormatter;
 import project.Parts;
 
 import java.io.File;
@@ -34,6 +35,8 @@ public class FileSaver {
             int savedFileCellNum = 0;
             while(cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
+                String formattedText = TextFormatter.deleteChineseSymbols(cell.getStringCellValue());
+                cell.setCellValue(formattedText);
                 Cell savedFileCell = savedFileRow.createCell(savedFileCellNum);
                 savedFileCell.setCellValue(cell.getStringCellValue());
                 savedFileCellNum++;
