@@ -2,6 +2,7 @@ package project;
 
 import org.apache.poi.ss.usermodel.Row;
 import project.CellCheckers.TvCellChecker;
+import project.CellCheckers.TvCellCheckerImpl;
 import project.Matchers.TvMatcher;
 import project.PartsPatterns.TvPartsPatterns;
 
@@ -15,7 +16,7 @@ public class Main
 {
     public static void main(String[] args) throws IOException {
         FileInputStream fis = new FileInputStream(new File("C:/demo/employee.xls"));
-        ExcelReader excelReader = new ExcelReader(new TvMatcher(new TvCellChecker(new TvPartsPatterns())), fis);
+        ExcelReader excelReader = new ExcelReader(new TvMatcher(new TvCellCheckerImpl(new TvPartsPatterns())), fis);
         System.out.println(excelReader.getMainPartsRowTable().size());
 
         Map<Row, Parts> map = excelReader.getMainPartsRowTable();

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TvMatcher implements Matcher {
 
-    TvCellChecker tvCellChecker;
+    private TvCellChecker tvCellChecker;
 
     public TvMatcher(TvCellChecker tvCellChecker) {
         this.tvCellChecker = tvCellChecker;
