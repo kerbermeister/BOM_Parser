@@ -1,13 +1,15 @@
-package project;
+package project.Matchers;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import project.Parts;
+import project.CellCheckers.TvCellChecker;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-class TvMatcher implements Matcher {
+public class TvMatcher implements Matcher {
 
     TvCellChecker tvCellChecker;
 
@@ -27,7 +29,7 @@ class TvMatcher implements Matcher {
                 if (tvCellChecker.containsMainboard(cell)) {
                     mainPartsMap.put(row, Parts.MAINBOARD);
                     continue;
-                } else if (cell.getStringCellValue().contains("speaker")) {
+                } else if (tvCellChecker.containsSpeaker(cell)) {
                     mainPartsMap.put(row, Parts.SPEAKER);
                     continue;
                 } else if (tvCellChecker.containsLcd(cell)) {
