@@ -1,7 +1,6 @@
 package project;
 
 import org.apache.poi.ss.usermodel.Row;
-import project.CellCheckers.TvCellChecker;
 import project.CellCheckers.TvCellCheckerImpl;
 import project.Matchers.TvMatcher;
 import project.PartsPatterns.TvPartsPatterns;

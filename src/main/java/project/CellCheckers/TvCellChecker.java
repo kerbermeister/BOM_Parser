@@ -1,7 +1,6 @@
 package project.CellCheckers;
 
 import org.apache.poi.ss.usermodel.Cell;
-import project.PartsPatterns.TvPartsPatterns;
 
 public interface TvCellChecker {
 
