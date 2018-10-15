@@ -1,6 +1,7 @@
 package project.CellCheckers;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import project.PartsPatterns.TvPartsPatterns;
 
 public class TvCellCheckerImpl implements TvCellChecker {
@@ -11,6 +12,7 @@ public class TvCellCheckerImpl implements TvCellChecker {
     }
 
     public boolean containsMainboard(Cell cell) {
+        cell.setCellType(CellType.STRING);
         for (String str : tvPartsPatterns.mainBoardTemplates) {
             if (checkForMainboard(cell.getStringCellValue(), str)) {
                 return true;
@@ -20,6 +22,7 @@ public class TvCellCheckerImpl implements TvCellChecker {
     }
 
     public boolean containsLcd(Cell cell) {
+        cell.setCellType(CellType.STRING);
         for (String str : tvPartsPatterns.ledPanelTemplates) {
             if (checkForLcd(cell.getStringCellValue(), str)) {
                 return true;
@@ -29,6 +32,7 @@ public class TvCellCheckerImpl implements TvCellChecker {
     }
 
     public boolean containsSpeaker(Cell cell) {
+        cell.setCellType(CellType.STRING);
         for (String str : tvPartsPatterns.speakerTemplates) {
             if (checkForSpeaker(cell.getStringCellValue(), str)) {
                 return true;

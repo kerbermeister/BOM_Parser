@@ -57,7 +57,7 @@ public class ExcelReader {
         this.matcher = matcher;
         this.fileInputStream = fileInputStream;
         hssfWorkbook = new HSSFWorkbook(fileInputStream);
-        hssfSheet = hssfWorkbook.getSheetAt(0);
+        hssfSheet = hssfWorkbook.getSheetAt(1);
     }
 
     public Map<Row, Parts> getMainPartsRowTable() {
