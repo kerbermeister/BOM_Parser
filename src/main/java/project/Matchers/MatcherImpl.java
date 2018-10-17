@@ -1,7 +1,7 @@
 /*
-    This is an implementation of Matcher and this implementation can actually work with any rowIterator and
+    This is an implementation of Matcher and it can actually work with any rowIterator and
     Pattern implementation given; That means it is not bound to any specific type of pattern. It will result
-    with HashMap<Row, Parts> made after comparing all the elements of row-Iterator and pattern given;
+    with HashMap<Row, Parts> created after comparing all the elements of row-Iterator to the given pattern ;
  */
 
 package project.Matchers;
@@ -53,7 +53,7 @@ public class MatcherImpl implements Matcher {
             Parts partType = entry.getValue();
             List<String> partPatternList = entry.getKey();
             for (String str : partPatternList) {
-                if (cellString.contains(str)) {
+                if (cellString.toLowerCase().contains(str.toLowerCase())) {
                     return partType;
                 }
             }

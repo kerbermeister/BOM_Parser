@@ -7,8 +7,11 @@ import java.util.ArrayList;
 public final class TextFormatter {
 
     public static String deleteChineseSymbols(String s) {
-        String formattedString = s.replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,]", "");
-        return formattedString;
+        if (s.contains("Ω")) {
+            s = s.replaceAll("Ω", " Ohm");
+        }
+        s = s.replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,]", "");
+        return s;
     }
 
     public static ArrayList<RowTemplate> formatCells(ArrayList<RowTemplate> rowTemplateList) {

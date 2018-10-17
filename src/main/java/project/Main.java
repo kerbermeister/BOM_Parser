@@ -46,7 +46,8 @@ public class Main
 //        FileSaver fileSaver = new FileSaver(map);
 //        fileSaver.save();
 
-        TestFileSaver testFileSaver = new TestFileSaver(0,1 , 4 , 5, 6 , 13);
+        TestFileSaver testFileSaver = new TestFileSaver(0,
+                1 , 4 , 5, 6 , 13);
         rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
         testFileSaver.save(rowTemplateArrayList);
 
@@ -59,6 +60,8 @@ public class Main
             System.out.println(rowTemplate.getRl());
             System.out.println("-----");
         }
+
+
 
     }
 }
