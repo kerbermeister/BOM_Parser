@@ -39,6 +39,7 @@ public class Main
             System.out.println(rowTemplate.getPart());
             System.out.println(rowTemplate.getDesc());
             System.out.println(rowTemplate.getSpec());
+            System.out.println(rowTemplate.getRl());
             System.out.println("-----");
         }
 

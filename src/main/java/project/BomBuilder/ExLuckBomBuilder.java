@@ -31,13 +31,13 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
 
             Sections section = matchSection(partType);
             System.out.println(section.name());  // just a logger, to be deleted
-            RowTemplate rowTemplate = buildBomRow(section, row, partNumberColumn, descColumn, specColumn);
+            RowTemplate rowTemplate = buildBomRow(section, row, partNumberColumn, descColumn, specColumn, partType);
             rowTemplatesList.add(rowTemplate);
         }
         return rowTemplatesList;
     }
 
-    protected RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn)
+    protected RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType)
     {
         RowTemplate rowTemplate = new RowTemplate();
         rowTemplate.setSection(sections.name());
@@ -53,6 +53,7 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
         rowTemplate.setPart(cellArrayList.get(partNumberColumn-1).getStringCellValue());
         rowTemplate.setDesc(cellArrayList.get(descColumn-1).getStringCellValue());
         rowTemplate.setSpec(cellArrayList.get(specColumn-1).getStringCellValue());
+        rowTemplate.setRl(Integer.toString(partType.getRepairLevel()));
 
         return rowTemplate;
     }
@@ -68,4 +69,5 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
         }
         return null;
     }
+
 }

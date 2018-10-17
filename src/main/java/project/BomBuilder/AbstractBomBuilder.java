@@ -21,5 +21,6 @@ public abstract class AbstractBomBuilder {
 
     abstract HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplateList);
 
-    abstract RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn);
+    abstract RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType);
+
 }
