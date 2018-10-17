@@ -1,3 +1,9 @@
+/*
+    To add new part you should specify:
+    1) its repair level (int value from 2 to 5)
+    2) section name (String value) from e-num "Sections"
+ */
+
 package project;
 
 import project.BomBuilder.Sections;

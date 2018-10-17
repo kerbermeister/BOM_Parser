@@ -28,7 +28,6 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
             Map.Entry<Row, Parts> entry = iterator.next();
             Parts partType = entry.getValue();
             Row row = entry.getKey();
-
             RowTemplate rowTemplate = buildBomRow(row, partNumberColumn, descColumn, specColumn, partType);
             rowTemplatesList.add(rowTemplate);
         }
