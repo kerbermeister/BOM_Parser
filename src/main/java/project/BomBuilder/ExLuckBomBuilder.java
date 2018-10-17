@@ -29,18 +29,18 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
             Parts partType = entry.getValue();
             Row row = entry.getKey();
 
-            Sections section = matchSection(partType);
-            System.out.println(section.name());  // just a logger, to be deleted
+            String section = partType.getSection();
+            System.out.println(section);  // just a logger, to be deleted
             RowTemplate rowTemplate = buildBomRow(section, row, partNumberColumn, descColumn, specColumn, partType);
             rowTemplatesList.add(rowTemplate);
         }
         return rowTemplatesList;
     }
 
-    protected RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType)
+    protected RowTemplate buildBomRow(String section, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType)
     {
         RowTemplate rowTemplate = new RowTemplate();
-        rowTemplate.setSection(sections.name());
+        rowTemplate.setSection(section);
 
         Iterator<Cell> cellIterator = row.cellIterator();
         ArrayList<Cell> cellArrayList = new ArrayList<Cell>();
@@ -57,17 +57,5 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
 
         return rowTemplate;
     }
-
-
-    private Sections matchSection(Parts partType) {
-        if (partType.name() == "MAINBOARD") {
-            return Sections.DEN;
-        } else if (partType.name() == "SPEAKER") {
-            return Sections.SPK;
-        } else if (partType.name() == "LCD") {
-            return Sections.LCD;
-        }
-        return null;
-    }
-
+    
 }

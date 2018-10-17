@@ -15,12 +15,8 @@ public abstract class AbstractBomBuilder {
 
     abstract ArrayList<RowTemplate> createRowTemplateList(Map<Row, Parts> mainPartsMap);
 
-    private Sections matchSection(Parts partType) {
-        return Sections.DEFAULT;
-    }
-
     abstract HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplateList);
 
-    abstract RowTemplate buildBomRow(Sections sections, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType);
+    abstract RowTemplate buildBomRow(String section, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType);
 
 }
