@@ -1,11 +1,9 @@
 package project;
 
 import org.apache.poi.ss.usermodel.Row;
-import project.BomBuilder.AbstractBomBuilder;
-import project.BomBuilder.Sections;
-import project.BomBuilder.TvBomBuilder;
+import project.BomBuilder.ExLuckBomBuilder;
+import project.BomBuilder.RowTemplate;
 import project.CellCheckers.TvCellCheckerImpl;
-import project.Formatters.TextFormatter;
 import project.Matchers.TvMatcher;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
@@ -13,6 +11,7 @@ import project.Saver.FileSaver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -32,6 +31,16 @@ public class Main
 
         FileSaver fileSaver = new FileSaver(map);
         fileSaver.save();
+
+        ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(2,4,5);
+        ArrayList<RowTemplate> rowTemplateArrayList = exLuckBomBuilder.createRowTemplateList(map);
+        for (RowTemplate rowTemplate : rowTemplateArrayList) {
+            System.out.println(rowTemplate.getSection());
+            System.out.println(rowTemplate.getPart());
+            System.out.println(rowTemplate.getDesc());
+            System.out.println(rowTemplate.getSpec());
+            System.out.println("-----");
+        }
 
     }
 }
