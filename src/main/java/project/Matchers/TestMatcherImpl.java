@@ -1,6 +1,7 @@
 package project.Matchers;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import project.Parts;
 import project.PartsPatterns.Patterns;
@@ -28,6 +29,7 @@ public class TestMatcherImpl {
             Iterator<Cell> cellIterator = row.cellIterator();
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
+                cell.setCellType(CellType.STRING);
                 Parts partType = checkCell(cell);
                 if (partType == null) {
                     continue;

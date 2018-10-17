@@ -11,21 +11,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ExcelReader {
-    private Matcher matcher;
     private FileInputStream fileInputStream;
     private HSSFWorkbook hssfWorkbook;
     private HSSFSheet hssfSheet;
 
     public ExcelReader() {
 
-    }
-
-    public Matcher getMatcher() {
-        return matcher;
-    }
-
-    public void setMatcher(Matcher matcher) {
-        this.matcher = matcher;
     }
 
     public FileInputStream getFileInputStream() {
@@ -53,17 +44,16 @@ public class ExcelReader {
     }
 
 
-    public ExcelReader(Matcher matcher, FileInputStream fileInputStream) throws IOException {
-        this.matcher = matcher;
+    public ExcelReader(FileInputStream fileInputStream) throws IOException {
         this.fileInputStream = fileInputStream;
         hssfWorkbook = new HSSFWorkbook(fileInputStream);
         hssfSheet = hssfWorkbook.getSheetAt(1);
     }
 
-    public Map<Row, Parts> getMainPartsRowTable() {
-        Iterator<Row> rowIterator = hssfSheet.rowIterator();
-        return matcher.getMainParts(rowIterator);
-    }
+//    public Map<Row, Parts> getMainPartsRowTable() {
+//        Iterator<Row> rowIterator = hssfSheet.rowIterator();
+//        return matcher.getMainParts(rowIterator);
+//    }
 
     public Iterator<Row> getExcelList() {
         return hssfSheet.rowIterator();

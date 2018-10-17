@@ -22,9 +22,8 @@ public class Main
 {
     public static void main(String[] args) throws IOException {
         FileInputStream fis = new FileInputStream(new File("C:/demo/книга122.xls"));
-        ExcelReader excelReader = new ExcelReader(new TvMatcher(new TvCellCheckerImpl(new TvPartsPatterns())), fis);
+        ExcelReader excelReader = new ExcelReader(fis);
 
-        Map<Row, Parts> map = excelReader.getMainPartsRowTable();
         TestMatcherImpl testMatcher = new TestMatcherImpl(new TestTvPartsPatterns());
 
         Map<Row, Parts> map2 = testMatcher.getMainParts(excelReader.getExcelList());
@@ -43,7 +42,7 @@ public class Main
 //        FileSaver fileSaver = new FileSaver(map);
 //        fileSaver.save();
 //
-        ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(2,4,5);
+        ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(3,4,5);
         ArrayList<RowTemplate> rowTemplateArrayList = exLuckBomBuilder.createRowTemplateList(map2);
         for (RowTemplate rowTemplate : rowTemplateArrayList) {
             System.out.println(rowTemplate.getSection());
