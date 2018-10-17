@@ -53,7 +53,9 @@ public class MatcherImpl implements Matcher {
             Parts partType = entry.getValue();
             List<String> partPatternList = entry.getKey();
             for (String str : partPatternList) {
-                if (cellString.toLowerCase().contains(str.toLowerCase())) {
+                str = str.replaceAll("[^A-Za-zА-Яа-я]", "");
+                if (cellString.toLowerCase().replaceAll("[^A-Za-zА-Яа-я]", "").
+                        contains(str.toLowerCase())) {
                     return partType;
                 }
             }

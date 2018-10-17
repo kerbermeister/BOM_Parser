@@ -25,20 +25,16 @@ public class TvPartsPatterns extends Patterns {
     }
 
     private void initialize() {
-        mainBoardTemplates.add("main board");
         mainBoardTemplates.add("maineboard");
         mainBoardTemplates.add("mainboard");
-        mainBoardTemplates.add("main_board");
-        mainBoardTemplates.add("main-board");
+
 
         ledPanelTemplates.add("lcd");
         ledPanelTemplates.add("lcm");
         ledPanelTemplates.add("led panel");
         ledPanelTemplates.add("led");
         ledPanelTemplates.add("panel");
-        ledPanelTemplates.add("led-panel");
         ledPanelTemplates.add("lcm-panel");
-        ledPanelTemplates.add("led_panel");
 
         speakerTemplates.add("speaker");
 
