@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestTvPartsPatterns extends Patterns {
+public class TvPartsPatterns extends Patterns {
 
     private static final List<String> mainBoardTemplates = new ArrayList<String>();
     private static final List<String> ledPanelTemplates = new ArrayList<String>();
@@ -15,12 +15,11 @@ public class TestTvPartsPatterns extends Patterns {
 
     private Map<List<String>, Parts> patternsMap;
 
-    @Override
     public Map<List<String>, Parts> getPatternsMap() {
         return patternsMap;
     }
 
-    public TestTvPartsPatterns() {
+    public TvPartsPatterns() {
         patternsMap = new HashMap<List<String>, Parts>();
         initialize();
     }

@@ -4,8 +4,8 @@ import org.apache.poi.ss.usermodel.Row;
 import project.BomBuilder.ExLuckBomBuilder;
 import project.BomBuilder.RowTemplate;
 import project.Matchers.Matcher;
-import project.Matchers.TestMatcherImpl;
-import project.PartsPatterns.TestTvPartsPatterns;
+import project.Matchers.MatcherImpl;
+import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
 
 import java.io.File;
@@ -21,7 +21,7 @@ public class Main
         FileInputStream fis = new FileInputStream(new File("C:/demo/книга122.xls"));
         ExcelReader excelReader = new ExcelReader(fis);
 
-        Matcher testMatcher = new TestMatcherImpl(new TestTvPartsPatterns());
+        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
 
         Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList());
         Iterator<Row> iterator = map.keySet().iterator();

@@ -1,3 +1,8 @@
+/*
+    This is an implementation of Matcher and this implementation can actually work with any rowIterator and
+    pattern implementation given; That means it is not bound to any specific type of pattern.
+ */
+
 package project.Matchers;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,11 +16,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class TestMatcherImpl implements Matcher {
+public class MatcherImpl implements Matcher {
 
     private Patterns patterns;
 
-    public TestMatcherImpl(Patterns patterns) {
+    public MatcherImpl(Patterns patterns) {
         this.patterns = patterns;
     }
 
