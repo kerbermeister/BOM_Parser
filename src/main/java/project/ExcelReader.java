@@ -3,12 +3,10 @@ package project;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-import project.Matchers.Matcher;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Map;
 
 public class ExcelReader {
     private FileInputStream fileInputStream;
@@ -49,11 +47,6 @@ public class ExcelReader {
         hssfWorkbook = new HSSFWorkbook(fileInputStream);
         hssfSheet = hssfWorkbook.getSheetAt(1);
     }
-
-//    public Map<Row, Parts> getMainPartsRowTable() {
-//        Iterator<Row> rowIterator = hssfSheet.rowIterator();
-//        return matcher.getMainParts(rowIterator);
-//    }
 
     public Iterator<Row> getExcelList() {
         return hssfSheet.rowIterator();

@@ -5,15 +5,13 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import project.Parts;
 import project.PartsPatterns.Patterns;
-import project.PartsPatterns.TestTvPartsPatterns;
-import project.PartsPatterns.TvPartsPatterns;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class TestMatcherImpl {
+public class TestMatcherImpl implements Matcher {
 
     private Patterns patterns;
 
@@ -43,7 +41,6 @@ public class TestMatcherImpl {
     }
 
     private Parts checkCell(Cell cell) {
-        String cellText = cell.getStringCellValue();
         Iterator<Map.Entry<List<String>, Parts>> mapIterator = patterns.getPatternsMap().entrySet().iterator();
         String cellString = cell.getStringCellValue();
 
