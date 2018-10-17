@@ -36,6 +36,7 @@ public class Main
         ArrayList<RowTemplate> rowTemplateArrayList = exLuckBomBuilder.createRowTemplateList(map);
         for (RowTemplate rowTemplate : rowTemplateArrayList) {
             System.out.println(rowTemplate.getSection());
+            System.out.println(rowTemplate.getSectionPart());
             System.out.println(rowTemplate.getPart());
             System.out.println(rowTemplate.getDesc());
             System.out.println(rowTemplate.getSpec());

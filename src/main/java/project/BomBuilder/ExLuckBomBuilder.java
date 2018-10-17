@@ -29,19 +29,15 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
             Parts partType = entry.getValue();
             Row row = entry.getKey();
 
-            String section = partType.getSection();
-            System.out.println(section);  // just a logger, to be deleted
-            RowTemplate rowTemplate = buildBomRow(section, row, partNumberColumn, descColumn, specColumn, partType);
+            RowTemplate rowTemplate = buildBomRow(row, partNumberColumn, descColumn, specColumn, partType);
             rowTemplatesList.add(rowTemplate);
         }
         return rowTemplatesList;
     }
 
-    protected RowTemplate buildBomRow(String section, Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType)
+    protected RowTemplate buildBomRow(Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType)
     {
         RowTemplate rowTemplate = new RowTemplate();
-        rowTemplate.setSection(section);
-
         Iterator<Cell> cellIterator = row.cellIterator();
         ArrayList<Cell> cellArrayList = new ArrayList<Cell>();
 
@@ -54,8 +50,9 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
         rowTemplate.setDesc(cellArrayList.get(descColumn-1).getStringCellValue());
         rowTemplate.setSpec(cellArrayList.get(specColumn-1).getStringCellValue());
         rowTemplate.setRl(Integer.toString(partType.getRepairLevel()));
-
+        rowTemplate.setSection(partType.getSection());
+        rowTemplate.setSectionPart(cellArrayList.get(partNumberColumn-1).getStringCellValue());
         return rowTemplate;
     }
-    
+
 }
