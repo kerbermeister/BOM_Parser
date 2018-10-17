@@ -64,4 +64,8 @@ public class ExcelReader {
         Iterator<Row> rowIterator = hssfSheet.rowIterator();
         return matcher.getMainParts(rowIterator);
     }
+
+    public Iterator<Row> getExcelList() {
+        return hssfSheet.rowIterator();
+    }
 }
