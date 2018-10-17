@@ -35,9 +35,7 @@ public class MatcherImpl implements Matcher {
                 Cell cell = cellIterator.next();
                 cell.setCellType(CellType.STRING);
                 Parts partType = checkCell(cell);
-                if (partType == null) {
-                    continue;
-                } else {
+                if (partType != null) {
                     mainPartsRowTable.put(row, partType);
                     continue;
                 }

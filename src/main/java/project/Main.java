@@ -3,11 +3,14 @@ package project;
 import org.apache.poi.ss.usermodel.Row;
 import project.BomBuilder.ExLuckBomBuilder;
 import project.BomBuilder.RowTemplate;
+import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
 import project.Matchers.MatcherImpl;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
+import project.Saver.TestFileSaver;
 
+import javax.xml.soap.Text;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,11 +39,17 @@ public class Main
 //            System.out.println("part: " + row + " | " + map2.get(row));
 //        }
 //
-        FileSaver fileSaver = new FileSaver(map);
-        fileSaver.save();
+
 //
         ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(3,4,5);
         ArrayList<RowTemplate> rowTemplateArrayList = exLuckBomBuilder.createRowTemplateList(map);
+//        FileSaver fileSaver = new FileSaver(map);
+//        fileSaver.save();
+
+        TestFileSaver testFileSaver = new TestFileSaver(0,1 , 4 , 5, 6 , 13);
+        rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
+        testFileSaver.save(rowTemplateArrayList);
+
         for (RowTemplate rowTemplate : rowTemplateArrayList) {
             System.out.println(rowTemplate.getSection());
             System.out.println(rowTemplate.getSectionPart());
