@@ -1,6 +1,7 @@
 /*
     This is an implementation of Matcher and this implementation can actually work with any rowIterator and
-    pattern implementation given; That means it is not bound to any specific type of pattern.
+    Pattern implementation given; That means it is not bound to any specific type of pattern. It will result
+    with HashMap<Row, Parts> made after comparing all the elements of row-Iterator and pattern given;
  */
 
 package project.Matchers;
