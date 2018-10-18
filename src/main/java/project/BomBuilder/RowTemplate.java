@@ -1,3 +1,8 @@
+/*
+    This class only represents an entity. It is not bound to anything and can be used with any BomBuilder
+    implementation.
+ */
+
 package project.BomBuilder;
 
 public class RowTemplate {
@@ -122,6 +127,4 @@ public class RowTemplate {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 }

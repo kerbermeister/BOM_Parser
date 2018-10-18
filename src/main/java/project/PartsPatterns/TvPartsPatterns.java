@@ -12,6 +12,7 @@ public class TvPartsPatterns extends Patterns {
     private static final List<String> mainBoardTemplates = new ArrayList<String>();
     private static final List<String> ledPanelTemplates = new ArrayList<String>();
     private static final List<String> speakerTemplates = new ArrayList<String>();
+    private static final List<String> remoteControlTemplates = new ArrayList<String>();
 
     private Map<List<String>, Parts> patternsMap;
 
@@ -38,8 +39,11 @@ public class TvPartsPatterns extends Patterns {
 
         speakerTemplates.add("speaker");
 
+        remoteControlTemplates.add("remote control");
+
         patternsMap.put(mainBoardTemplates, Parts.MAINBOARD);
         patternsMap.put(speakerTemplates, Parts.SPEAKER);
         patternsMap.put(ledPanelTemplates, Parts.LCD);
+        patternsMap.put(remoteControlTemplates, Parts.RMC);
     }
 }
