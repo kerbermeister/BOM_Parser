@@ -58,7 +58,7 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
         rowTemplate.setSpec(cellArrayList.get(specColumn-1).getStringCellValue());
         rowTemplate.setRl(Integer.toString(partType.getRepairLevel()));
         rowTemplate.setSection(partType.getSection());
-        rowTemplate.setSectionPart(cellArrayList.get(partNumberColumn-1).getStringCellValue());
+        rowTemplate.setSectionPart(partNumber);
         return rowTemplate;
     }
 
