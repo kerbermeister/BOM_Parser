@@ -41,7 +41,7 @@ public class Main
 //
 
 //
-        ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(3,4,5);
+        ExLuckBomBuilder exLuckBomBuilder = new ExLuckBomBuilder(2,4,5, 1);
         ArrayList<RowTemplate> rowTemplateArrayList = exLuckBomBuilder.createRowTemplateList(map);
 //        FileSaver fileSaver = new FileSaver(map);
 //        fileSaver.save();

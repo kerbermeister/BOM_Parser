@@ -8,11 +8,13 @@ import project.Parts;
 import java.util.*;
 
 public class ExLuckBomBuilder extends AbstractBomBuilder {
+    private int partNumberColumnOffset;
 
-    public ExLuckBomBuilder(int partNumberColumn, int descColumn, int specColumn) {
+    public ExLuckBomBuilder(int partNumberColumn, int descColumn, int specColumn, int partNumberColumnOffset) {
         this.partNumberColumn = partNumberColumn;
         this.descColumn = descColumn;
         this.specColumn = specColumn;
+        this.partNumberColumnOffset = partNumberColumnOffset;
     }
 
     public HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplatesList) {
@@ -45,7 +47,13 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
             cellArrayList.add(cell);
         }
 
-        rowTemplate.setPart(cellArrayList.get(partNumberColumn-1).getStringCellValue());
+        String partNumber;
+        if (cellArrayList.get(partNumberColumn-1).getStringCellValue().contentEquals(""))
+            partNumber = cellArrayList.get((partNumberColumn-1)+partNumberColumnOffset).getStringCellValue();
+        else
+            partNumber = cellArrayList.get(partNumberColumn-1).getStringCellValue();
+
+        rowTemplate.setPart(partNumber);
         rowTemplate.setDesc(cellArrayList.get(descColumn-1).getStringCellValue());
         rowTemplate.setSpec(cellArrayList.get(specColumn-1).getStringCellValue());
         rowTemplate.setRl(Integer.toString(partType.getRepairLevel()));
