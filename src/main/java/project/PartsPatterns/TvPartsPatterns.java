@@ -36,6 +36,7 @@ public class TvPartsPatterns extends Patterns {
         ledPanelTemplates.add("led");
         ledPanelTemplates.add("panel");
         ledPanelTemplates.add("lcm-panel");
+        ledPanelTemplates.add("open cell");
 
         speakerTemplates.add("speaker");
 

@@ -47,5 +47,7 @@ public class ExcelReader {
         return hssfWorkbook.getSheetAt(sheetIndex).rowIterator();
     }
 
-
+    public String getSheetName(int sheetIndex) {
+        return hssfWorkbook.getSheetAt(sheetIndex).getSheetName();
+    }
 }

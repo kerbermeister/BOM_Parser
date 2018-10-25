@@ -27,38 +27,45 @@ public class SvaController implements Controller {
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
 
-
-
+        int numberOfSheets = excelReader.getNumberOfSheets();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
 
-        Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(1));
+
+        for (int i = 0; i < numberOfSheets; i++) {
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i));
 
 
-        Iterator<Row> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
-            Row row = iterator.next();
-            System.out.println("part: " + row + " | " + map.get(row));
-        }
-
-        BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,3,4, -1);
-        ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
 
-        TestFileSaver testFileSaver = new TestFileSaver(0,
-                1 , 4 , 5, 6 , 13, file.getName());
-        rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-        testFileSaver.save(rowTemplateArrayList);
+            Iterator<Row> iterator = map.keySet().iterator();
+            while (iterator.hasNext()) {
+                Row row = iterator.next();
+                System.out.println("part: " + row + " | " + map.get(row));
+            }
 
-        for (RowTemplate rowTemplate : rowTemplateArrayList) {
-            System.out.println(rowTemplate.getSection());
-            System.out.println(rowTemplate.getSectionPart());
-            System.out.println(rowTemplate.getPart());
-            System.out.println(rowTemplate.getDesc());
-            System.out.println(rowTemplate.getSpec());
-            System.out.println(rowTemplate.getRl());
-            System.out.println("-----");
+
+
+
+            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,3,4, -1);
+            ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
+
+
+            TestFileSaver testFileSaver = new TestFileSaver(0,
+                    1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
+            rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
+            testFileSaver.save(rowTemplateArrayList);
+
+
+
+            for (RowTemplate rowTemplate : rowTemplateArrayList) {
+                System.out.println(rowTemplate.getSection());
+                System.out.println(rowTemplate.getSectionPart());
+                System.out.println(rowTemplate.getPart());
+                System.out.println(rowTemplate.getDesc());
+                System.out.println(rowTemplate.getSpec());
+                System.out.println(rowTemplate.getRl());
+                System.out.println("-----");
+            }
         }
     }
-
-
 }
