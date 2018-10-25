@@ -50,6 +50,9 @@ public class TestFileSaver {
             rowNum++;
         }
 
+
+        addCustomRowTemplate();
+
         File file = new File(folderToSave + "BOM_" + sheet.getSheetName().toUpperCase());
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
@@ -57,4 +60,23 @@ public class TestFileSaver {
         System.out.println("file has been saved");
         return true;
     }
+
+    private void addCustomRowTemplate() {
+        Row row = sheet.createRow(sheet.getLastRowNum()+1);
+        row.createCell(sectionColumn).setCellValue("UNI");
+        row.createCell(sectionPartColumn).setCellValue("P-LEVEL4");
+        row.createCell(partNumberColumn).setCellValue("P-LEVEL4");
+        row.createCell(descColumn).setCellValue("for C, D, R, L");
+        row.createCell(specColumn).setCellValue("for C, D, R, L");
+        row.createCell(repairLvlColumn).setCellValue("4");
+
+        row = sheet.createRow(sheet.getLastRowNum()+1);
+        row.createCell(sectionColumn).setCellValue("UNI");
+        row.createCell(sectionPartColumn).setCellValue("P-LEVEL4");
+        row.createCell(partNumberColumn).setCellValue("P-LEVEL5");
+        row.createCell(descColumn).setCellValue("for IC, CPU");
+        row.createCell(specColumn).setCellValue("for IC, CPU");
+        row.createCell(repairLvlColumn).setCellValue("5");
+    }
+
 }
