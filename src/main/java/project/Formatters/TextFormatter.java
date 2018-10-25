@@ -10,7 +10,7 @@ public final class TextFormatter {
         if (s.contains("Ω")) {
             s = s.replaceAll("Ω", " Ohm");
         }
-        s = s.replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,\\s]", "");
+        s = s.replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,\\s,\\(,\\)]", "");
         return s;
     }
 

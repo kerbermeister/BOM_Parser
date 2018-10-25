@@ -11,7 +11,6 @@ import java.util.Iterator;
 public class ExcelReader {
     private FileInputStream fileInputStream;
     private HSSFWorkbook hssfWorkbook;
-    private HSSFSheet hssfSheet;
 
     public ExcelReader() {
 
@@ -33,22 +32,20 @@ public class ExcelReader {
         this.hssfWorkbook = hssfWorkbook;
     }
 
-    public HSSFSheet getHssfSheet() {
-        return hssfSheet;
-    }
 
-    public void setHssfSheet(HSSFSheet hssfSheet) {
-        this.hssfSheet = hssfSheet;
-    }
-
-
-    public ExcelReader(FileInputStream fileInputStream, int sheetIndex) throws IOException {
+    public ExcelReader(FileInputStream fileInputStream) throws IOException {
         this.fileInputStream = fileInputStream;
         hssfWorkbook = new HSSFWorkbook(fileInputStream);
-        hssfSheet = hssfWorkbook.getSheetAt(sheetIndex);
     }
 
-    public Iterator<Row> getExcelList() {
-        return hssfSheet.rowIterator();
+    public int getNumberOfSheets() {
+        return hssfWorkbook.getNumberOfSheets();
     }
+
+
+    public Iterator<Row> getExcelList(int sheetIndex) {
+        return hssfWorkbook.getSheetAt(sheetIndex).rowIterator();
+    }
+
+
 }

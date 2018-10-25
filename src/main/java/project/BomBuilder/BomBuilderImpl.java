@@ -7,10 +7,10 @@ import project.Parts;
 
 import java.util.*;
 
-public class ExLuckBomBuilder extends AbstractBomBuilder {
+public class BomBuilderImpl extends AbstractBomBuilder {
     private int partNumberColumnOffset;
 
-    public ExLuckBomBuilder(int partNumberColumn, int descColumn, int specColumn, int partNumberColumnOffset) {
+    public BomBuilderImpl(int partNumberColumn, int descColumn, int specColumn, int partNumberColumnOffset) {
         this.partNumberColumn = partNumberColumn;
         this.descColumn = descColumn;
         this.specColumn = specColumn;

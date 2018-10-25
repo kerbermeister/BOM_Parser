@@ -19,13 +19,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ExLuckController implements Controller {
+public class SvaController implements Controller {
 
-    public void launch() throws FileNotFoundException, IOException {
+    public void launch() throws IOException, FileNotFoundException {
 
-        File file = new File("C:/demo/книга122.xls");
+        File file = new File("C:/demo/original BOMs/18IRL0302_BBK_BOM_list.xls");
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
+
+
 
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
 
@@ -38,7 +40,7 @@ public class ExLuckController implements Controller {
             System.out.println("part: " + row + " | " + map.get(row));
         }
 
-        BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,4,5, 1);
+        BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,3,4, -1);
         ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
 
@@ -57,4 +59,6 @@ public class ExLuckController implements Controller {
             System.out.println("-----");
         }
     }
+
+
 }
