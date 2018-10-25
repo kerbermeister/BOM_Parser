@@ -21,9 +21,17 @@ import java.util.Map;
 
 public class SvaController implements Controller {
 
+    private String filePath;
+    private String folderToSave;
+
+    public SvaController(String filePath, String folderToSave) {
+        this.filePath = filePath;
+        this.folderToSave = folderToSave;
+    }
+
     public void launch() throws IOException, FileNotFoundException {
 
-        File file = new File("C:/demo/original BOMs/18IRL0302_BBK_BOM_list.xls");
+        File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
 
@@ -53,7 +61,7 @@ public class SvaController implements Controller {
             TestFileSaver testFileSaver = new TestFileSaver(0,
                     1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            testFileSaver.save(rowTemplateArrayList);
+            testFileSaver.save(rowTemplateArrayList, folderToSave);
 
 
 

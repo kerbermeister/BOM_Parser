@@ -37,7 +37,7 @@ public class TestFileSaver {
         this.sheet = workbook.createSheet(sheetName);
     }
 
-    public boolean save(List<RowTemplate> rowTemplateList) throws IOException, FileNotFoundException {
+    public boolean save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, FileNotFoundException {
         int rowNum = 0;
         for (RowTemplate rowTemplate : rowTemplateList) {
             Row row = sheet.createRow(rowNum);
@@ -50,7 +50,7 @@ public class TestFileSaver {
             rowNum++;
         }
 
-        File file = new File("C:/Demo/BOM_" + sheet.getSheetName().toUpperCase());
+        File file = new File(folderToSave + "BOM_" + sheet.getSheetName().toUpperCase());
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         workbook.write(fileOutputStream);

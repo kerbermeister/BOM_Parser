@@ -20,11 +20,19 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ExLuckController implements Controller {
-    
+
+    private String filesFolder;
+    private String folderToSave;
+
+    public ExLuckController(String filesFolder, String folderToSave) {
+        this.filesFolder = filesFolder;
+        this.folderToSave = folderToSave;
+    }
+
     public void launch() throws FileNotFoundException, IOException {
 
 
-        File folder = new File("C:/demo/Exluck_test");
+        File folder = new File(filesFolder);
 
         File[] files = folder.listFiles();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
@@ -55,7 +63,7 @@ public class ExLuckController implements Controller {
             TestFileSaver testFileSaver = new TestFileSaver(0,
                     1 , 4 , 5, 6 , 13, file.getName());
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            testFileSaver.save(rowTemplateArrayList);
+            testFileSaver.save(rowTemplateArrayList, folderToSave);
 
 
 
