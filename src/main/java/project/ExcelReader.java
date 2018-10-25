@@ -42,10 +42,10 @@ public class ExcelReader {
     }
 
 
-    public ExcelReader(FileInputStream fileInputStream) throws IOException {
+    public ExcelReader(FileInputStream fileInputStream, int sheetIndex) throws IOException {
         this.fileInputStream = fileInputStream;
         hssfWorkbook = new HSSFWorkbook(fileInputStream);
-        hssfSheet = hssfWorkbook.getSheetAt(1);
+        hssfSheet = hssfWorkbook.getSheetAt(sheetIndex);
     }
 
     public Iterator<Row> getExcelList() {

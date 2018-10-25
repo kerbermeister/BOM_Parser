@@ -19,7 +19,7 @@ public class ExLuckBomBuilder extends AbstractBomBuilder {
 
     public HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplatesList) {
         return null;
-    }
+    }  //to delete
 
     public ArrayList<RowTemplate> createRowTemplateList(Map<Row, Parts> mainPartsMap) {
         ArrayList<RowTemplate> rowTemplatesList = new ArrayList<RowTemplate>();

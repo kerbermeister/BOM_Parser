@@ -15,7 +15,7 @@ public abstract class AbstractBomBuilder {
 
     abstract ArrayList<RowTemplate> createRowTemplateList(Map<Row, Parts> mainPartsMap);
 
-    abstract HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplateList);
+    abstract HSSFWorkbook buildBom(ArrayList<RowTemplate> rowTemplateList);  //to delete
 
     abstract RowTemplate buildBomRow(Row row, int partNumberColumn, int descColumn, int specColumn, Parts partType);
 

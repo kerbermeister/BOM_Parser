@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestFileSaver {
     HSSFWorkbook workbook = new HSSFWorkbook();
-    HSSFSheet sheet = workbook.createSheet("BOM list");
+    HSSFSheet sheet;
     private int sectionColumn;
     private int sectionPartColumn;
     private int partNumberColumn;
@@ -26,13 +26,15 @@ public class TestFileSaver {
                          int partNumberColumn,
                          int descColumn,
                          int specColumn,
-                         int repairLvlColumn) {
+                         int repairLvlColumn,
+                         String sheetName) {
         this.sectionColumn = sectionColumn;
         this.sectionPartColumn = sectionPartColumn;
         this.partNumberColumn = partNumberColumn;
         this.descColumn = descColumn;
         this.specColumn = specColumn;
         this.repairLvlColumn = repairLvlColumn;
+        this.sheet = workbook.createSheet(sheetName);
     }
 
     public boolean save(List<RowTemplate> rowTemplateList) throws IOException, FileNotFoundException {
@@ -48,8 +50,9 @@ public class TestFileSaver {
             rowNum++;
         }
 
-        File file = new File("C:/Demo/saved.xls");
+        File file = new File("C:/Demo/BOM_" + sheet.getSheetName().toUpperCase());
         FileOutputStream fileOutputStream = new FileOutputStream(file);
+
         workbook.write(fileOutputStream);
         System.out.println("file has been saved");
         return true;
