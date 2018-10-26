@@ -35,9 +35,8 @@ public class SvaController implements Controller {
         File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
-        PatternsToIgnore patternsToIgnore = new PatternsToIgnore();
         int numberOfSheets = excelReader.getNumberOfSheets();
-        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
+        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
 
 
         for (int i = 0; i < numberOfSheets; i++) {

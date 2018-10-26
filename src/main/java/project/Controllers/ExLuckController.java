@@ -8,6 +8,7 @@ import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
 import project.Matchers.MatcherImpl;
 import project.Parts;
+import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
 
@@ -35,7 +36,7 @@ public class ExLuckController implements Controller {
         File folder = new File(filesFolder);
 
         File[] files = folder.listFiles();
-        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
+        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
 
 
         for (File file : files) {

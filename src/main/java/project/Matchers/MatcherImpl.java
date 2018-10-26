@@ -21,9 +21,11 @@ import java.util.Map;
 public class MatcherImpl implements Matcher {
 
     private Patterns patterns;
+    private PatternsToIgnore patternsToIgnore;
 
-    public MatcherImpl(Patterns patterns) {
+    public MatcherImpl(Patterns patterns, PatternsToIgnore patternsToIgnore) {
         this.patterns = patterns;
+        this.patternsToIgnore = patternsToIgnore;
     }
 
     public Map<Row, Parts> getMainParts(Iterator<Row> rowIterator) {
