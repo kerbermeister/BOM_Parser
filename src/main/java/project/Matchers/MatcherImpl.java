@@ -12,12 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class TestMatcher implements Matcher {
+public class MatcherImpl implements Matcher {
 
     private Patterns patterns;
     private PatternsToIgnore patternsToIgnore;
 
-    public TestMatcher(Patterns patterns, PatternsToIgnore patternsToIgnore) {
+    public MatcherImpl(Patterns patterns, PatternsToIgnore patternsToIgnore) {
         this.patterns = patterns;
         this.patternsToIgnore = patternsToIgnore;
     }
@@ -30,22 +30,18 @@ public class TestMatcher implements Matcher {
             Iterator<Cell> cellIterator = row.cellIterator();
             int currentColumn = 0;
             while (cellIterator.hasNext()) {
+                Cell cell = cellIterator.next();
+                cell.setCellType(CellType.STRING);
                 if (currentColumn != descColumn) {
                     currentColumn++;
-                    Cell cell = cellIterator.next();
-                    cell.setCellType(CellType.STRING);
                     continue;
                 } else if (currentColumn == descColumn){
-                    Cell cell = cellIterator.next();
-                    cell.setCellType(CellType.STRING);
                     Parts partType = checkCell(cell);
                     if (partType != null) {
                         mainPartsRowTable.put(row, partType);
                         break;
                     }
                 } else {
-                    Cell cell = cellIterator.next();
-                    cell.setCellType(CellType.STRING);
                     break;
                 }
             }

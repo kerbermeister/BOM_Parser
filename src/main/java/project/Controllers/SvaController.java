@@ -6,7 +6,7 @@ import project.BomBuilder.RowTemplate;
 import project.ExcelReader;
 import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
-import project.Matchers.TestMatcher;
+import project.Matchers.MatcherImpl;
 import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
@@ -36,7 +36,7 @@ public class SvaController implements Controller {
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
         int numberOfSheets = excelReader.getNumberOfSheets();
-        Matcher testMatcher = new TestMatcher(new TvPartsPatterns(), new PatternsToIgnore());
+        Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
 
 
         for (int i = 0; i < numberOfSheets; i++) {
