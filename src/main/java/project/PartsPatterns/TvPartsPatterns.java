@@ -2,6 +2,7 @@ package project.PartsPatterns;
 
 import project.Parts;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,8 @@ public class TvPartsPatterns extends Patterns {
     private static final List<String> speakerTemplates = new ArrayList<String>();
     private static final List<String> remoteControlTemplates = new ArrayList<String>();
     private static final List<String> powerBoardTemplates = new ArrayList<String>();
+    private static final List<String> irBoardTemplates = new ArrayList<String>();
+    private static final List<String> controlBoardTemplates = new ArrayList<String>();
 
     private Map<List<String>, Parts> patternsMap;
 
@@ -44,10 +47,17 @@ public class TvPartsPatterns extends Patterns {
 
         remoteControlTemplates.add("remote control");
 
+        irBoardTemplates.add("IR board");
+
+        controlBoardTemplates.add("control board");
+        controlBoardTemplates.add("KEY board");
+
         patternsMap.put(mainBoardTemplates, Parts.MAINBOARD);
         patternsMap.put(speakerTemplates, Parts.SPEAKER);
         patternsMap.put(ledPanelTemplates, Parts.LCD);
         patternsMap.put(remoteControlTemplates, Parts.RMC);
         patternsMap.put(powerBoardTemplates, Parts.POWER_BOARD);
+        patternsMap.put(irBoardTemplates, Parts.IR_BOARD);
+        patternsMap.put(controlBoardTemplates, Parts.CONTROL_BOARD);
     }
 }

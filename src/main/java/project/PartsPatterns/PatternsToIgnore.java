@@ -13,5 +13,6 @@ public class PatternsToIgnore {
         ignoreList.add("wire");
         ignoreList.add("connector");
         ignoreList.add("cable");
+        ignoreList.add("tcon");
     }
 }

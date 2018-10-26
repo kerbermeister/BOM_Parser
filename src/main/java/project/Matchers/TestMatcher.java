@@ -1,9 +1,3 @@
-/*
-    This is an implementation of Matcher and it can actually work with any rowIterator and
-    Pattern implementation given; That means it is not bound to any specific type of pattern. It will result
-    with HashMap<Row, Parts> created after comparing all the elements of row-Iterator to the given pattern ;
- */
-
 package project.Matchers;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,12 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class MatcherImpl implements Matcher {
+public class TestMatcher implements Matcher {
 
     private Patterns patterns;
     private PatternsToIgnore patternsToIgnore;
 
-    public MatcherImpl(Patterns patterns, PatternsToIgnore patternsToIgnore) {
+    public TestMatcher(Patterns patterns, PatternsToIgnore patternsToIgnore) {
         this.patterns = patterns;
         this.patternsToIgnore = patternsToIgnore;
     }
@@ -34,13 +28,25 @@ public class MatcherImpl implements Matcher {
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
+            int currentColumn = 0;
             while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-                cell.setCellType(CellType.STRING);
-                Parts partType = checkCell(cell);
-                if (partType != null) {
-                    mainPartsRowTable.put(row, partType);
+                if (currentColumn != descColumn) {
+                    currentColumn++;
+                    Cell cell = cellIterator.next();
+                    cell.setCellType(CellType.STRING);
                     continue;
+                } else if (currentColumn == descColumn){
+                    Cell cell = cellIterator.next();
+                    cell.setCellType(CellType.STRING);
+                    Parts partType = checkCell(cell);
+                    if (partType != null) {
+                        mainPartsRowTable.put(row, partType);
+                        break;
+                    }
+                } else {
+                    Cell cell = cellIterator.next();
+                    cell.setCellType(CellType.STRING);
+                    break;
                 }
             }
         }
@@ -75,3 +81,4 @@ public class MatcherImpl implements Matcher {
         return null;
     }
 }
+
