@@ -14,5 +14,7 @@ public class PatternsToIgnore {
         ignoreList.add("connector");
         ignoreList.add("cable");
         ignoreList.add("tcon");
+        ignoreList.add("holder");
+        ignoreList.add("lvds");
     }
 }
