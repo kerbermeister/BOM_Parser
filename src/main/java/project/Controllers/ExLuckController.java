@@ -9,7 +9,7 @@ import project.Matchers.Matcher;
 import project.Matchers.MatcherImpl;
 import project.Parts;
 import project.PartsPatterns.TvPartsPatterns;
-import project.Saver.TestFileSaver;
+import project.Saver.FileSaver;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,10 +60,10 @@ public class ExLuckController implements Controller {
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
 
-            TestFileSaver testFileSaver = new TestFileSaver(0,
+            FileSaver fileSaver = new FileSaver(0,
                     1 , 4 , 5, 6 , 13, file.getName());
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            testFileSaver.save(rowTemplateArrayList, folderToSave);
+            fileSaver.save(rowTemplateArrayList, folderToSave);
 
 
 

@@ -8,8 +8,9 @@ import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
 import project.Matchers.MatcherImpl;
 import project.Parts;
+import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
-import project.Saver.TestFileSaver;
+import project.Saver.FileSaver;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +35,7 @@ public class SvaController implements Controller {
         File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(fis);
-
+        PatternsToIgnore patternsToIgnore = new PatternsToIgnore();
         int numberOfSheets = excelReader.getNumberOfSheets();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns());
 
@@ -58,10 +59,10 @@ public class SvaController implements Controller {
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
 
-            TestFileSaver testFileSaver = new TestFileSaver(0,
+            FileSaver fileSaver = new FileSaver(0,
                     1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            testFileSaver.save(rowTemplateArrayList, folderToSave);
+            fileSaver.save(rowTemplateArrayList, folderToSave);
 
 
 

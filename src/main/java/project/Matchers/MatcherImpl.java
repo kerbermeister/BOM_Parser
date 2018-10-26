@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import project.Parts;
 import project.PartsPatterns.Patterns;
+import project.PartsPatterns.PatternsToIgnore;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +58,14 @@ public class MatcherImpl implements Matcher {
                 String cellStringForComparing = cellString.toLowerCase().replaceAll("[^A-Za-zА-Яа-я]", "");
                 if (cellStringForComparing.
                         contains(str.toLowerCase())) {
+                    for (String ignore : PatternsToIgnore.ignoreList) {
+                        ignore = ignore.replaceAll("[^A-Za-zА-Яа-я]", "");
+                        if (cellStringForComparing.contains(ignore.toLowerCase())) {
+                            return  null;
+                        } else {
+                            continue;
+                        }
+                    }
                     return partType;
                 }
             }

@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class TestFileSaver {
+public class FileSaver {
     HSSFWorkbook workbook = new HSSFWorkbook();
     HSSFSheet sheet;
     private int sectionColumn;
@@ -21,13 +21,13 @@ public class TestFileSaver {
     private int specColumn;
     private int repairLvlColumn;
 
-    public TestFileSaver(int sectionColumn,
-                         int sectionPartColumn,
-                         int partNumberColumn,
-                         int descColumn,
-                         int specColumn,
-                         int repairLvlColumn,
-                         String sheetName) {
+    public FileSaver(int sectionColumn,
+                     int sectionPartColumn,
+                     int partNumberColumn,
+                     int descColumn,
+                     int specColumn,
+                     int repairLvlColumn,
+                     String sheetName) {
         this.sectionColumn = sectionColumn;
         this.sectionPartColumn = sectionPartColumn;
         this.partNumberColumn = partNumberColumn;
