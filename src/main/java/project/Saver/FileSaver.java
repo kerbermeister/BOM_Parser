@@ -3,6 +3,8 @@ package project.Saver;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import project.BomBuilder.RowTemplate;
 
 import java.io.File;
@@ -12,8 +14,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileSaver {
-    HSSFWorkbook workbook = new HSSFWorkbook();
-    HSSFSheet sheet;
+    XSSFWorkbook workbook = new XSSFWorkbook();
+    XSSFSheet sheet;
     private int sectionColumn;
     private int sectionPartColumn;
     private int partNumberColumn;

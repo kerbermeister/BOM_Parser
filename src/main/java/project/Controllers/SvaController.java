@@ -40,7 +40,7 @@ public class SvaController implements Controller {
 
 
         for (int i = 0; i < numberOfSheets; i++) {
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), 2);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), 1);
 
 
 
@@ -54,7 +54,7 @@ public class SvaController implements Controller {
 
 
 
-            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,3,4, -1);
+            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(1,2,3, -1);
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
 

@@ -37,11 +37,13 @@ public class MatcherImpl implements Matcher {
                     continue;
                 } else if (currentColumn == descColumn){
                     Parts partType = checkCell(cell);
+                    currentColumn++;
                     if (partType != null) {
                         mainPartsRowTable.put(row, partType);
                         break;
                     }
                 } else {
+                    currentColumn++;
                     break;
                 }
             }

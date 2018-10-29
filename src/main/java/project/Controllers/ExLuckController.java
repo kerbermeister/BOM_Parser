@@ -44,7 +44,7 @@ public class ExLuckController implements Controller {
             ExcelReader excelReader = new ExcelReader(fis);
 
 
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(1), 2);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(1), 3);
 
 
 

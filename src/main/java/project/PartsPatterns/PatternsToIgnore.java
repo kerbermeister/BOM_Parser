@@ -16,5 +16,9 @@ public class PatternsToIgnore {
         ignoreList.add("tcon");
         ignoreList.add("holder");
         ignoreList.add("lvds");
+        ignoreList.add("protection");
+        ignoreList.add("paper");
+        ignoreList.add("audio");
+
     }
 }
