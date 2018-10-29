@@ -1,11 +1,16 @@
 package project.UI;
 
 import project.Controllers.ConfigEntity;
+import project.Controllers.Controller;
+import project.Controllers.ExLuckController;
+import project.Controllers.SvaController;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Cmd {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException {
         while(true) {
             int chooseManufacturer;
             Scanner scanner = new Scanner(System.in);
@@ -33,11 +38,16 @@ public class Cmd {
                     configEntity.setFilePath(scanner.next());
                     System.out.print("Enter sheet index (starts from 0) with BOM-list: ");
                     configEntity.setSheetIndex(scanner.nextInt());
-
+                    Controller exLuckController = new ExLuckController(configEntity);
+                    exLuckController.launch();
                     break;
 
                 case 2:
-
+                    System.out.print("Enter the full name of folder and file name of SVA BOM-file: ");
+                    configEntity.setFilePath(scanner.next());
+                    Controller svaController = new SvaController(configEntity);
+                    svaController.launch();
+                    break;
             }
         }
     }

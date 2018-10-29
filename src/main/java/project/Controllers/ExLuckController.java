@@ -26,18 +26,16 @@ import java.util.Map;
 
 public class ExLuckController implements Controller {
 
-    private String filesFolder;
-    private String folderToSave;
+    private ConfigEntity configEntity;
 
-    public ExLuckController(String filesFolder, String folderToSave) {
-        this.filesFolder = filesFolder;
-        this.folderToSave = folderToSave;
+    public ExLuckController(ConfigEntity configEntity) {
+        this.configEntity = configEntity;
     }
 
     public void launch() throws FileNotFoundException, IOException {
 
 
-        File folder = new File(filesFolder);
+        File folder = new File(configEntity.getFilePath());
 
         File[] files = folder.listFiles();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
@@ -48,7 +46,7 @@ public class ExLuckController implements Controller {
             ExcelReader excelReader = new ExcelReader(new XSSFWorkbook(fis));
 
 
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(1), 3);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(configEntity.getSheetIndex()), configEntity.getDescColumn()-1);
 
 
 
@@ -61,14 +59,19 @@ public class ExLuckController implements Controller {
 
 
 
-            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,4,5, 1);
+            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
+                                                                configEntity.getDescColumn(),
+                                                                configEntity.getSpecColumn(),
+                                                                configEntity.getPartNumberColumnOffset());
+
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
             Workbook workbook = new XSSFWorkbook();
+
             FileSaver fileSaver = new FileSaver(workbook,0,
                     1 , 4 , 5, 6 , 13, file.getName());
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            fileSaver.save(rowTemplateArrayList, folderToSave);
+            fileSaver.save(rowTemplateArrayList, configEntity.getFolderToSave());
 
 
 

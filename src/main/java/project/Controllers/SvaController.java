@@ -25,17 +25,15 @@ import java.util.Map;
 
 public class SvaController implements Controller {
 
-    private String filePath;
-    private String folderToSave;
+    private ConfigEntity configEntity;
 
-    public SvaController(String filePath, String folderToSave) {
-        this.filePath = filePath;
-        this.folderToSave = folderToSave;
+    public SvaController(ConfigEntity configEntity) {
+        this.configEntity = configEntity;
     }
 
     public void launch() throws IOException, FileNotFoundException {
 
-        File file = new File(filePath);
+        File file = new File(configEntity.getFilePath());
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
         int numberOfSheets = excelReader.getNumberOfSheets();
@@ -43,7 +41,7 @@ public class SvaController implements Controller {
 
 
         for (int i = 0; i < numberOfSheets; i++) {
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), 1);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn()-1);
 
 
 
@@ -57,14 +55,19 @@ public class SvaController implements Controller {
 
 
 
-            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(1,2,3, -1);
+            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
+                                                                configEntity.getDescColumn(),
+                                                                configEntity.getSpecColumn(),
+                                                                configEntity.getPartNumberColumnOffset());
+
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
             Workbook workbook = new HSSFWorkbook();
+
             FileSaver fileSaver = new FileSaver(workbook, 0,
                     1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            fileSaver.save(rowTemplateArrayList, folderToSave);
+            fileSaver.save(rowTemplateArrayList, configEntity.getFolderToSave());
 
 
 
@@ -78,5 +81,6 @@ public class SvaController implements Controller {
                 System.out.println("-----");
             }
         }
+        fis.close();
     }
 }
