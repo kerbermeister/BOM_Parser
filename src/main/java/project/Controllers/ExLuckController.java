@@ -1,6 +1,10 @@
 package project.Controllers;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import project.BomBuilder.BomBuilderImpl;
 import project.BomBuilder.RowTemplate;
 import project.ExcelReader;
@@ -41,7 +45,7 @@ public class ExLuckController implements Controller {
 
         for (File file : files) {
             FileInputStream fis = new FileInputStream(file);
-            ExcelReader excelReader = new ExcelReader(fis);
+            ExcelReader excelReader = new ExcelReader(new XSSFWorkbook(fis));
 
 
             Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(1), 3);
@@ -60,8 +64,8 @@ public class ExLuckController implements Controller {
             BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(2,4,5, 1);
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
-
-            FileSaver fileSaver = new FileSaver(0,
+            Workbook workbook = new XSSFWorkbook();
+            FileSaver fileSaver = new FileSaver(workbook,0,
                     1 , 4 , 5, 6 , 13, file.getName());
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
             fileSaver.save(rowTemplateArrayList, folderToSave);

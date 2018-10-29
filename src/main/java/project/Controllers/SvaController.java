@@ -1,6 +1,9 @@
 package project.Controllers;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import project.BomBuilder.BomBuilderImpl;
 import project.BomBuilder.RowTemplate;
 import project.ExcelReader;
@@ -34,7 +37,7 @@ public class SvaController implements Controller {
 
         File file = new File(filePath);
         FileInputStream fis = new FileInputStream(file);
-        ExcelReader excelReader = new ExcelReader(fis);
+        ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
         int numberOfSheets = excelReader.getNumberOfSheets();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
 
@@ -57,8 +60,8 @@ public class SvaController implements Controller {
             BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(1,2,3, -1);
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
-
-            FileSaver fileSaver = new FileSaver(0,
+            Workbook workbook = new HSSFWorkbook();
+            FileSaver fileSaver = new FileSaver(workbook, 0,
                     1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
             fileSaver.save(rowTemplateArrayList, folderToSave);

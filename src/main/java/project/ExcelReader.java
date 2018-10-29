@@ -11,28 +11,26 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class ExcelReader {
-    private FileInputStream fileInputStream;
-    private XSSFWorkbook hssfWorkbook;
+    private Workbook workbook;
 
     public ExcelReader() {
 
     }
 
-    public ExcelReader(FileInputStream fileInputStream) throws IOException {
-        this.fileInputStream = fileInputStream;
-        hssfWorkbook = new XSSFWorkbook(fileInputStream);
+    public ExcelReader(Workbook workbook) throws IOException {
+        this.workbook = workbook;
     }
 
     public int getNumberOfSheets() {
-        return hssfWorkbook.getNumberOfSheets();
+        return workbook.getNumberOfSheets();
     }
 
 
     public Iterator<Row> getExcelList(int sheetIndex) {
-        return hssfWorkbook.getSheetAt(sheetIndex).rowIterator();
+        return workbook.getSheetAt(sheetIndex).rowIterator();
     }
 
     public String getSheetName(int sheetIndex) {
-        return hssfWorkbook.getSheetAt(sheetIndex).getSheetName();
+        return workbook.getSheetAt(sheetIndex).getSheetName();
     }
 }

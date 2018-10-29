@@ -3,6 +3,8 @@ package project.Saver;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import project.BomBuilder.RowTemplate;
@@ -14,8 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileSaver {
-    XSSFWorkbook workbook = new XSSFWorkbook();
-    XSSFSheet sheet;
+    Workbook workbook;
+    Sheet sheet;
     private int sectionColumn;
     private int sectionPartColumn;
     private int partNumberColumn;
@@ -23,13 +25,15 @@ public class FileSaver {
     private int specColumn;
     private int repairLvlColumn;
 
-    public FileSaver(int sectionColumn,
+    public FileSaver(Workbook workbook,
+                     int sectionColumn,
                      int sectionPartColumn,
                      int partNumberColumn,
                      int descColumn,
                      int specColumn,
                      int repairLvlColumn,
                      String sheetName) {
+        this.workbook = workbook;
         this.sectionColumn = sectionColumn;
         this.sectionPartColumn = sectionPartColumn;
         this.partNumberColumn = partNumberColumn;
@@ -37,6 +41,7 @@ public class FileSaver {
         this.specColumn = specColumn;
         this.repairLvlColumn = repairLvlColumn;
         this.sheet = workbook.createSheet(sheetName);
+
     }
 
     public boolean save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, FileNotFoundException {
