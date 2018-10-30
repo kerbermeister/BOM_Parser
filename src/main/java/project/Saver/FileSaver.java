@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileSaver {
-    Workbook workbook;
-    Sheet sheet;
+    private Workbook workbook;
+    private Sheet sheet;
     private int sectionColumn;
     private int sectionPartColumn;
     private int partNumberColumn;
