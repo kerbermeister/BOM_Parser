@@ -23,8 +23,12 @@ public class XlsxConverter {
             System.out.println("/$ : the old processed directory and all the nested directories and files have been deleted recursively");
         }
 
-        new File(directoryPath + processedDirectoryName).mkdir();
-        System.out.println("/$ : the new directory for processed files has been created");
+        if (new File(directoryPath + processedDirectoryName).mkdir() == true) {
+            System.out.println("/$ : the new directory for processed files has been created");
+        } else {
+            System.out.println("/$ : ERROR!!! the directory for processed files could not be created");
+        }
+
         File[] files = directory.listFiles();
         int fileNumber = 1;
 
@@ -92,7 +96,6 @@ public class XlsxConverter {
                 }
                 sheetNum++;
             }
-
             File outputFile = new File(directoryPath + processedDirectoryName + "\\" + "(" + fileNumber + ")" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);
