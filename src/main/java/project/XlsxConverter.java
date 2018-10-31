@@ -18,6 +18,7 @@ public class XlsxConverter {
         File directory = new File(directoryPath);
         new File(directoryPath + processedDirectoryName).mkdir();
         File[] files = directory.listFiles();
+        int fileNumber = 1;
 
         for (File file : files) {
             if (!file.isFile()) {
@@ -71,7 +72,7 @@ public class XlsxConverter {
                 }
             }
 
-            File outputFile = new File(directoryPath + processedDirectoryName + "\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
+            File outputFile = new File(directoryPath + processedDirectoryName + "\\" + "(" + fileNumber + ")" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);
             fileOutputStream.close();
@@ -79,6 +80,7 @@ public class XlsxConverter {
             Long fileProcessingEndTime = System.currentTimeMillis();
             Long totalFileProcessingTime = fileProcessingEndTime - fileProcessingStartTime;
             System.out.println("file " + file.getName() + " has been succesfully converted and saved as " + outputFile.getName() + ", it took " + totalFileProcessingTime + " ms");
+            fileNumber++;
         }
         Long endTime = System.currentTimeMillis();
         Long totalWorkingTime = (endTime - startTime);
