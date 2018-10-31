@@ -2,10 +2,7 @@ package project;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
@@ -21,6 +18,7 @@ public class XlsxConverter {
         String directoryPath = "E:\\!DOCUMENTATION\\exluck\\87-2018-7\\T.D7\\bom\\";
 
         File directory = new File(directoryPath);
+        new File(directoryPath + "\\processed").mkdir();
         File[] files = directory.listFiles();
 
         for (File file : files) {
@@ -29,15 +27,23 @@ public class XlsxConverter {
             } else if (file.isHidden()) {
                 System.out.println("file " + file.getName() + " is hidden, cannot be processed");
                 continue;
-            } else if (!getFileExtension(file.getName()).equals("xlsx")) {
+            } else if (!getFileExtension(file.getName()).equals("xlsx") && !getFileExtension(file.getName()).equals("xls")) {
                 continue;
             }
 
             Long fileProcessingStartTime = System.currentTimeMillis();
-            XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
+
+            Workbook workbook;
+            if (getFileExtension(file.getName()).equals("xlsx")) {
+                workbook = new XSSFWorkbook(file);
+            } else {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                workbook = new HSSFWorkbook(fileInputStream);
+            }
+
             HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
-            Iterator<Sheet> sheetIterator = xssfWorkbook.sheetIterator();
+            Iterator<Sheet> sheetIterator = workbook.sheetIterator();
             while (sheetIterator.hasNext()) {
                 Sheet xssfSheet = sheetIterator.next();
                 Iterator<Row> rowIterator = xssfSheet.rowIterator();
@@ -67,7 +73,7 @@ public class XlsxConverter {
                 }
             }
 
-            File outputFile = new File(directoryPath + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
+            File outputFile = new File(directoryPath + "\\processed\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);
             fileOutputStream.close();
