@@ -50,11 +50,22 @@ public class XlsxConverter {
 
             HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
             Iterator<Sheet> sheetIterator = workbook.sheetIterator();
+            int sheetNum = 0;
+            System.out.println("/$ total number of sheets within the file " + file.getName() + " : " + workbook.getNumberOfSheets());
             while (sheetIterator.hasNext()) {
+                if (workbook.isSheetHidden(sheetNum)) {
+                    System.out.println("/$ WARNING!!! the sheet #" + sheetNum + " is hidden, this sheet has been skipped");
+                    sheetNum++;
+                    sheetIterator.next();
+                    continue;
+                }
+
                 Sheet xssfSheet = sheetIterator.next();
                 Iterator<Row> rowIterator = xssfSheet.rowIterator();
                 Sheet hssfSheet = hssfWorkbook.createSheet(xssfSheet.getSheetName());
                 int rowNum = 0;
+
+
 
                 while (rowIterator.hasNext()) {
                     Row xssfRow = rowIterator.next();
@@ -77,6 +88,7 @@ public class XlsxConverter {
                         }
                     }
                 }
+                sheetNum++;
             }
 
             File outputFile = new File(directoryPath + processedDirectoryName + "\\" + "(" + fileNumber + ")" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
