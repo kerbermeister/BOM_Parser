@@ -37,9 +37,10 @@ public class SvaController implements Controller {
 
         File[] files = folder.listFiles();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
-
+        int fileNumber = 1;
 
         for (File file : files) {
+
             FileInputStream fis = new FileInputStream(file);
             ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
             int numberOfSheets = excelReader.getNumberOfSheets();
@@ -70,7 +71,7 @@ public class SvaController implements Controller {
                 Workbook workbook = new HSSFWorkbook();
 
                 FileSaver fileSaver = new FileSaver(workbook, 0,
-                        1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
+                        1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + "(" + fileNumber + ")" + ".xls");
                 rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
                 fileSaver.save(rowTemplateArrayList, processedFolder);
 
@@ -86,6 +87,7 @@ public class SvaController implements Controller {
                     System.out.println("-----");
                 }
             }
+            fileNumber++;
             fis.close();
         }
     }
