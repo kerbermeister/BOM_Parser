@@ -30,7 +30,7 @@ public class MatcherImpl implements Matcher {
             int currentColumn = 0;
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-                cell.setCellType(CellType.STRING);
+//                cell.setCellType(CellType.STRING);
                 if (currentColumn != descColumn) {
                     currentColumn++;
                     continue;
@@ -39,12 +39,13 @@ public class MatcherImpl implements Matcher {
                     currentColumn++;
                     if (partType != null) {
                         mainPartsRowTable.put(row, partType);
-                        break;
                     }
-                } else {
-                    currentColumn++;
                     break;
                 }
+//                else {
+//                    currentColumn++;
+//                    break;
+//                }
             }
         }
         return mainPartsRowTable;
