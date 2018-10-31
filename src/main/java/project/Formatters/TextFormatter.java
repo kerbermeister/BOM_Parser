@@ -1,7 +1,6 @@
 package project.Formatters;
 
 import project.BomBuilder.RowTemplate;
-
 import java.util.ArrayList;
 
 public final class TextFormatter {

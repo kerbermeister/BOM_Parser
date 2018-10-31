@@ -5,7 +5,6 @@ import project.Controllers.ConfigEntity;
 import project.Controllers.Controller;
 import project.Controllers.ExLuckController;
 import project.Controllers.SvaController;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;

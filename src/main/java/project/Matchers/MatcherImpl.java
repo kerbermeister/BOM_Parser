@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.Row;
 import project.Parts;
 import project.PartsPatterns.Patterns;
 import project.PartsPatterns.PatternsToIgnore;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;

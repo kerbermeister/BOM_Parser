@@ -15,7 +15,6 @@ import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
 import project.XlsxConverter;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
