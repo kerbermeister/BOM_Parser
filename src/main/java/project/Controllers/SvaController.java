@@ -47,8 +47,21 @@ public class SvaController implements Controller {
 
 
             for (int i = 0; i < numberOfSheets; i++) {
+                BomBuilderImpl bomBuilderImpl;
                 Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn()-1);
 
+                if (map.isEmpty()) {
+                    map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn());
+                    bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn()+1,
+                            configEntity.getDescColumn()+1,
+                            configEntity.getSpecColumn()+1,
+                            configEntity.getPartNumberColumnOffset());
+                } else {
+                    bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
+                            configEntity.getDescColumn(),
+                            configEntity.getSpecColumn(),
+                            configEntity.getPartNumberColumnOffset());
+                }
 
 
 
@@ -60,14 +73,9 @@ public class SvaController implements Controller {
 
 
 
-
-                BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
-                        configEntity.getDescColumn(),
-                        configEntity.getSpecColumn(),
-                        configEntity.getPartNumberColumnOffset());
-
                 ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
+                System.out.println("Size of row template list is: " + rowTemplateArrayList.size());
                 Workbook workbook = new HSSFWorkbook();
 
                 FileSaver fileSaver = new FileSaver(workbook, 0,

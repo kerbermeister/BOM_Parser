@@ -31,7 +31,7 @@ public class Cmd {
 
             switch (chooseManufacturer) {
                 case 1:
-                    System.out.print("Enter folder where ExpressLuck BOM-files stored: ");
+                    System.out.print("Enter the path where ExpressLuck BOM-files stored: ");
                     configEntity.setFilePath(scanner.next());
                     System.out.print("Enter sheet index (starts from 0) with BOM-list: ");
                     configEntity.setSheetIndex(scanner.nextInt());
@@ -40,7 +40,7 @@ public class Cmd {
                     break;
 
                 case 2:
-                    System.out.print("Enter the full name of folder and file name of SVA BOM-file: ");
+                    System.out.print("Enter the path where SVA BOM-files stored: ");
                     configEntity.setFilePath(scanner.next());
                     Controller svaController = new SvaController(configEntity);
                     svaController.launch();
