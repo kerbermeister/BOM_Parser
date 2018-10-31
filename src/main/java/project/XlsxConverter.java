@@ -37,7 +37,7 @@ public class XlsxConverter {
             while (sheetIterator.hasNext()) {
                 Sheet xssfSheet = sheetIterator.next();
                 Iterator<Row> rowIterator = xssfSheet.rowIterator();
-                Sheet hssfSheet = hssfWorkbook.createSheet();
+                Sheet hssfSheet = hssfWorkbook.createSheet(xssfSheet.getSheetName());
                 int rowNum = 0;
 
                 while (rowIterator.hasNext()) {
