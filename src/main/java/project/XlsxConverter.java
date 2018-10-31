@@ -12,6 +12,9 @@ import java.io.*;
 import java.util.Iterator;
 
 public class XlsxConverter {
+    private static final int maxColumnNum = 255;
+    private static final int maxRowNum = 1024;
+
     public static void main(String[] args) throws IOException, FileNotFoundException, InvalidFormatException {
         Long startTime = System.currentTimeMillis();
 
@@ -24,6 +27,7 @@ public class XlsxConverter {
             if (!file.isFile()) {
                 continue;
             } else if (file.isHidden()) {
+                System.out.println("file " + file.getName() + " is hidden, cannot be processed");
                 continue;
             } else if (!getFileExtension(file.getName()).equals("xlsx")) {
                 continue;
@@ -45,6 +49,9 @@ public class XlsxConverter {
                     Iterator<Cell> cellIterator = xssfRow.cellIterator();
                     Row hssfRow = hssfSheet.createRow(rowNum);
                     rowNum++;
+                    if (rowNum >= maxRowNum) {
+                        break;
+                    }
                     int cellNum = 0;
                     while (cellIterator.hasNext()) {
                         Cell cell = cellIterator.next();
@@ -53,7 +60,7 @@ public class XlsxConverter {
                         hssfCell.setCellType(CellType.STRING);
                         hssfCell.setCellValue(cell.getStringCellValue());
                         cellNum++;
-                        if (cellNum > 20) {
+                        if (cellNum >= maxColumnNum) {
                             break;
                         }
                     }
@@ -71,7 +78,7 @@ public class XlsxConverter {
         }
         Long endTime = System.currentTimeMillis();
         Long totalWorkingTime = (endTime - startTime);
-        System.out.println("Total time is : " + totalWorkingTime);
+        System.out.println("Total time is : " + totalWorkingTime + " ms");
     }
 
     private static String getFileExtension(String fileName) {
