@@ -1,6 +1,7 @@
 package project.Controllers;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,6 +15,7 @@ import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
+import project.XlsxConverter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,9 +33,10 @@ public class SvaController implements Controller {
         this.configEntity = configEntity;
     }
 
-    public void launch() throws IOException, FileNotFoundException {
+    public void launch() throws IOException, FileNotFoundException, InvalidFormatException {
+        String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
+        File file = new File(processedFolder + "\\BBK_72_2018-8nd_18IRL0602_BBK_BOM_list_V1.0.xls");
 
-        File file = new File(configEntity.getFilePath());
         FileInputStream fis = new FileInputStream(file);
         ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
         int numberOfSheets = excelReader.getNumberOfSheets();
@@ -67,7 +70,7 @@ public class SvaController implements Controller {
             FileSaver fileSaver = new FileSaver(workbook, 0,
                     1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            fileSaver.save(rowTemplateArrayList, configEntity.getFolderToSave());
+            fileSaver.save(rowTemplateArrayList, processedFolder);
 
 
 

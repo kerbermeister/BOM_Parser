@@ -1,5 +1,6 @@
 package project.UI;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import project.Controllers.ConfigEntity;
 import project.Controllers.Controller;
 import project.Controllers.ExLuckController;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Cmd {
-    public static void main(String[] args) throws IOException, FileNotFoundException {
+    public static void main(String[] args) throws IOException, FileNotFoundException, InvalidFormatException {
         while(true) {
             int chooseManufacturer;
             Scanner scanner = new Scanner(System.in);
@@ -19,8 +20,7 @@ public class Cmd {
             System.out.println("Enter '1' if you'd like to parse ExpressLuck bom-files");
             System.out.println("Enter '2' if you'd like to parse SVA bom-files");
             chooseManufacturer = scanner.nextInt();
-            System.out.print("Select Excel version: 1 - below 2007, 2 - higher than 2007: ");
-            configEntity.setExcelVersion(scanner.nextInt());
+
             System.out.print("Enter part number column: ");
             configEntity.setPartNumberColumn(scanner.nextInt());
             System.out.print("Enter description column: ");
@@ -29,8 +29,6 @@ public class Cmd {
             configEntity.setSpecColumn(scanner.nextInt());
             System.out.print("Enter part number column offset: ");
             configEntity.setPartNumberColumnOffset(scanner.nextInt());
-            System.out.print("Enter folder to save processed BOM-files: ");
-            configEntity.setFolderToSave(scanner.next());
 
             switch (chooseManufacturer) {
                 case 1:

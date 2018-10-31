@@ -9,15 +9,6 @@ public class ConfigEntity {
     private int specColumn;
     private int partNumberColumnOffset;
     private int sheetIndex;
-    private int excelVersion;
-
-    public int getExcelVersion() {
-        return excelVersion;
-    }
-
-    public void setExcelVersion(int excelVersion) {
-        this.excelVersion = excelVersion;
-    }
 
     public ConfigEntity() {}
 
@@ -27,14 +18,6 @@ public class ConfigEntity {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
-    }
-
-    public String getFolderToSave() {
-        return folderToSave;
-    }
-
-    public void setFolderToSave(String folderToSave) {
-        this.folderToSave = folderToSave;
     }
 
     public int getPartNumberColumn() {

@@ -12,13 +12,12 @@ public class XlsxConverter {
     private static final int maxColumnNum = 255;
     private static final int maxRowNum = 1024;
 
-    public static void main(String[] args) throws IOException, FileNotFoundException, InvalidFormatException {
+    public static String convertFiles(String directoryPath) throws IOException, FileNotFoundException, InvalidFormatException {
         Long startTime = System.currentTimeMillis();
-
-        String directoryPath = "E:\\!DOCUMENTATION\\exluck\\87-2018-7\\T.D7\\bom\\";
+        String processedDirectoryName = "\\processed";
 
         File directory = new File(directoryPath);
-        new File(directoryPath + "\\processed").mkdir();
+        new File(directoryPath + processedDirectoryName).mkdir();
         File[] files = directory.listFiles();
 
         for (File file : files) {
@@ -73,7 +72,7 @@ public class XlsxConverter {
                 }
             }
 
-            File outputFile = new File(directoryPath + "\\processed\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
+            File outputFile = new File(directoryPath + processedDirectoryName + "\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);
             fileOutputStream.close();
@@ -85,6 +84,7 @@ public class XlsxConverter {
         Long endTime = System.currentTimeMillis();
         Long totalWorkingTime = (endTime - startTime);
         System.out.println("Total time is : " + totalWorkingTime + " ms");
+        return directoryPath + processedDirectoryName + "\\";
     }
 
     private static String getFileExtension(String fileName) {

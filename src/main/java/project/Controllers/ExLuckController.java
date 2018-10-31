@@ -2,6 +2,7 @@ package project.Controllers;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,6 +16,7 @@ import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
+import project.XlsxConverter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,10 +34,10 @@ public class ExLuckController implements Controller {
         this.configEntity = configEntity;
     }
 
-    public void launch() throws FileNotFoundException, IOException {
 
-
-        File folder = new File(configEntity.getFilePath());
+    public void launch() throws FileNotFoundException, IOException, InvalidFormatException {
+        String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
+        File folder = new File(processedFolder);
 
         File[] files = folder.listFiles();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
@@ -43,7 +45,7 @@ public class ExLuckController implements Controller {
 
         for (File file : files) {
             FileInputStream fis = new FileInputStream(file);
-            ExcelReader excelReader = new ExcelReader(new XSSFWorkbook(fis));
+            ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
 
 
             Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(configEntity.getSheetIndex()), configEntity.getDescColumn()-1);
@@ -66,12 +68,12 @@ public class ExLuckController implements Controller {
 
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 
-            Workbook workbook = new XSSFWorkbook();
+            Workbook workbook = new HSSFWorkbook();
 
             FileSaver fileSaver = new FileSaver(workbook,0,
                     1 , 4 , 5, 6 , 13, file.getName());
             rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            fileSaver.save(rowTemplateArrayList, configEntity.getFolderToSave());
+            fileSaver.save(rowTemplateArrayList, processedFolder);
 
 
 
@@ -85,6 +87,7 @@ public class ExLuckController implements Controller {
                 System.out.println(rowTemplate.getRl());
                 System.out.println("-----");
             }
+            fis.close();
         }
     }
 }
