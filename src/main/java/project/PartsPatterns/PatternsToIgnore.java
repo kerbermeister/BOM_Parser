@@ -19,6 +19,9 @@ public class PatternsToIgnore {
         ignoreList.add("protection");
         ignoreList.add("paper");
         ignoreList.add("audio");
+        ignoreList.add("pad");
+        ignoreList.add("antivibration");
+
 
     }
 }
