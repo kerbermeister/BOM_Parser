@@ -20,11 +20,11 @@ public class XlsxConverter {
         File directoryToDelete = new File(directoryPath + processedDirectoryName);
         if (directoryToDelete.exists()) {
             deleteProcessedDirectory(directoryToDelete);
-            System.out.println("/$ the old processed directory and all the nested directories and files have been deleted recursively");
+            System.out.println("/$ : the old processed directory and all the nested directories and files have been deleted recursively");
         }
 
         new File(directoryPath + processedDirectoryName).mkdir();
-        System.out.println("/$ the new directory for processed files has been created");
+        System.out.println("/$ : the new directory for processed files has been created");
         File[] files = directory.listFiles();
         int fileNumber = 1;
 
@@ -32,7 +32,7 @@ public class XlsxConverter {
             if (!file.isFile()) {
                 continue;
             } else if (file.isHidden()) {
-                System.out.println("file " + file.getName() + " is hidden, cannot be processed");
+                System.out.println("/$ : file " + file.getName() + " is hidden, cannot be processed");
                 continue;
             } else if (!getFileExtension(file.getName()).equals("xlsx") && !getFileExtension(file.getName()).equals("xls")) {
                 continue;
@@ -48,13 +48,15 @@ public class XlsxConverter {
                 workbook = new HSSFWorkbook(fileInputStream);
             }
 
+            System.out.println("/$ : converting " + file.getName() + "...");
+
             HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
             Iterator<Sheet> sheetIterator = workbook.sheetIterator();
             int sheetNum = 0;
-            System.out.println("/$ total number of sheets within the file " + file.getName() + " : " + workbook.getNumberOfSheets());
+            System.out.println("/$ : total number of sheets within the file " + file.getName() + " : " + workbook.getNumberOfSheets());
             while (sheetIterator.hasNext()) {
                 if (workbook.isSheetHidden(sheetNum)) {
-                    System.out.println("/$ WARNING!!! the sheet #" + sheetNum + " is hidden, this sheet has been skipped");
+                    System.out.println("/$ : WARNING!!! the sheet #" + sheetNum + " is hidden, this sheet has been skipped");
                     sheetNum++;
                     sheetIterator.next();
                     continue;
@@ -98,12 +100,12 @@ public class XlsxConverter {
 
             Long fileProcessingEndTime = System.currentTimeMillis();
             Long totalFileProcessingTime = fileProcessingEndTime - fileProcessingStartTime;
-            System.out.println("/$ file " + file.getName() + " has been succesfully converted and saved as " + outputFile.getName() + ", it took " + totalFileProcessingTime + " ms");
+            System.out.println("/$ : file " + file.getName() + " has been succesfully converted and saved as " + outputFile.getName() + ", it took " + totalFileProcessingTime + " ms");
             fileNumber++;
         }
         Long endTime = System.currentTimeMillis();
         Long totalWorkingTime = (endTime - startTime);
-        System.out.println("/$ Total time is : " + totalWorkingTime + " ms");
+        System.out.println("/$ : Total time is : " + totalWorkingTime + " ms");
         return directoryPath + processedDirectoryName + "\\";
     }
 
