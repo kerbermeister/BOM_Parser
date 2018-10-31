@@ -32,7 +32,6 @@ public class ExLuckController implements Controller {
         this.configEntity = configEntity;
     }
 
-
     public void launch() throws FileNotFoundException, IOException, InvalidFormatException {
         String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
         File folder = new File(processedFolder);

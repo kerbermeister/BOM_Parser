@@ -34,55 +34,60 @@ public class SvaController implements Controller {
 
     public void launch() throws IOException, FileNotFoundException, InvalidFormatException {
         String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
-        File file = new File(processedFolder + "\\BBK_72_2018-8nd_18IRL0602_BBK_BOM_list_V1.0.xls");
+        File folder = new File(processedFolder);
 
-        FileInputStream fis = new FileInputStream(file);
-        ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
-        int numberOfSheets = excelReader.getNumberOfSheets();
+        File[] files = folder.listFiles();
         Matcher testMatcher = new MatcherImpl(new TvPartsPatterns(), new PatternsToIgnore());
 
 
-        for (int i = 0; i < numberOfSheets; i++) {
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn()-1);
+        for (File file : files) {
+            FileInputStream fis = new FileInputStream(file);
+            ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
+            int numberOfSheets = excelReader.getNumberOfSheets();
+
+
+            for (int i = 0; i < numberOfSheets; i++) {
+                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn()-1);
 
 
 
 
-            Iterator<Row> iterator = map.keySet().iterator();
-            while (iterator.hasNext()) {
-                Row row = iterator.next();
-                System.out.println("part: " + row + " | " + map.get(row));
+                Iterator<Row> iterator = map.keySet().iterator();
+                while (iterator.hasNext()) {
+                    Row row = iterator.next();
+                    System.out.println("part: " + row + " | " + map.get(row));
+                }
+
+
+
+
+                BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
+                        configEntity.getDescColumn(),
+                        configEntity.getSpecColumn(),
+                        configEntity.getPartNumberColumnOffset());
+
+                ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
+
+                Workbook workbook = new HSSFWorkbook();
+
+                FileSaver fileSaver = new FileSaver(workbook, 0,
+                        1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
+                rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
+                fileSaver.save(rowTemplateArrayList, processedFolder);
+
+
+
+                for (RowTemplate rowTemplate : rowTemplateArrayList) {
+                    System.out.println(rowTemplate.getSection());
+                    System.out.println(rowTemplate.getSectionPart());
+                    System.out.println(rowTemplate.getPart());
+                    System.out.println(rowTemplate.getDesc());
+                    System.out.println(rowTemplate.getSpec());
+                    System.out.println(rowTemplate.getRl());
+                    System.out.println("-----");
+                }
             }
-
-
-
-
-            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
-                                                                configEntity.getDescColumn(),
-                                                                configEntity.getSpecColumn(),
-                                                                configEntity.getPartNumberColumnOffset());
-
-            ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
-
-            Workbook workbook = new HSSFWorkbook();
-
-            FileSaver fileSaver = new FileSaver(workbook, 0,
-                    1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + ".xls");
-            rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-            fileSaver.save(rowTemplateArrayList, processedFolder);
-
-
-
-            for (RowTemplate rowTemplate : rowTemplateArrayList) {
-                System.out.println(rowTemplate.getSection());
-                System.out.println(rowTemplate.getSectionPart());
-                System.out.println(rowTemplate.getPart());
-                System.out.println(rowTemplate.getDesc());
-                System.out.println(rowTemplate.getSpec());
-                System.out.println(rowTemplate.getRl());
-                System.out.println("-----");
-            }
+            fis.close();
         }
-        fis.close();
     }
 }
