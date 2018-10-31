@@ -21,12 +21,20 @@ public class XlsxConverter {
         File[] files = directory.listFiles();
 
         for (File file : files) {
+            if (!file.isFile()) {
+                continue;
+            } else if (file.isHidden()) {
+                continue;
+            } else if (!getFileExtension(file.getName()).equals("xlsx")) {
+                continue;
+            }
+
+            Long fileProcessingStartTime = System.currentTimeMillis();
             XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
             HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
             Iterator<Sheet> sheetIterator = xssfWorkbook.sheetIterator();
             while (sheetIterator.hasNext()) {
-                System.out.println("new sheet");
                 Sheet xssfSheet = sheetIterator.next();
                 Iterator<Row> rowIterator = xssfSheet.rowIterator();
                 Sheet hssfSheet = hssfWorkbook.createSheet();
@@ -37,8 +45,6 @@ public class XlsxConverter {
                     Iterator<Cell> cellIterator = xssfRow.cellIterator();
                     Row hssfRow = hssfSheet.createRow(rowNum);
                     rowNum++;
-                    System.out.println(rowNum);
-                    System.out.println("new row");
                     int cellNum = 0;
                     while (cellIterator.hasNext()) {
                         Cell cell = cellIterator.next();
@@ -47,7 +53,6 @@ public class XlsxConverter {
                         hssfCell.setCellType(CellType.STRING);
                         hssfCell.setCellValue(cell.getStringCellValue());
                         cellNum++;
-                        System.out.println(cellNum);
                         if (cellNum > 20) {
                             break;
                         }
@@ -55,15 +60,24 @@ public class XlsxConverter {
                 }
             }
 
-            File outputFile = new File(directoryPath + file.getName().substring(0, file.getName().indexOf(".")) + ".xls");
+            File outputFile = new File(directoryPath + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);
             fileOutputStream.close();
-            System.out.println("kek");
 
-            Long endTime = System.currentTimeMillis();
-            Long totalWorkingTime = (endTime - startTime);
-            System.out.println(totalWorkingTime);
+            Long fileProcessingEndTime = System.currentTimeMillis();
+            Long totalFileProcessingTime = fileProcessingEndTime - fileProcessingStartTime;
+            System.out.println("file " + file.getName() + " has been succesfully converted and saved as " + outputFile.getName() + ", it took " + totalFileProcessingTime + " ms");
         }
+        Long endTime = System.currentTimeMillis();
+        Long totalWorkingTime = (endTime - startTime);
+        System.out.println("Total time is : " + totalWorkingTime);
+    }
+
+    private static String getFileExtension(String fileName) {
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        }
+        return null;
     }
 }
