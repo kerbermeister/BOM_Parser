@@ -30,6 +30,8 @@ public class TvPartsPatterns extends Patterns {
     private void initialize() {
         mainBoardTemplates.add("maineboard");
         mainBoardTemplates.add("mainboard");
+        mainBoardTemplates.add("mainpcbassembly");
+        mainBoardTemplates.add("mainpcbassy");
 
         powerBoardTemplates.add("power board");
 
