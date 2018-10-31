@@ -105,7 +105,7 @@ public class XlsxConverter {
         }
         Long endTime = System.currentTimeMillis();
         Long totalWorkingTime = (endTime - startTime);
-        System.out.println("/$ : Total time is : " + totalWorkingTime + " ms");
+        System.out.println("/$ : Convertation has finished, total time is : " + totalWorkingTime + " ms");
         return directoryPath + processedDirectoryName + "\\";
     }
 
