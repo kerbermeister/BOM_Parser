@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class XlsxConverter {
     private static final int maxColumnNum = 255;
     private static final int maxRowNum = 1024;
-    private static final String processedDirectoryName = "\\processed";
+    private static final String processedDirectoryName = "\\done";
 
     public static String convertFiles(String directoryPath) throws IOException, FileNotFoundException, InvalidFormatException {
         Long startTime = System.currentTimeMillis();
