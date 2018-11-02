@@ -32,11 +32,12 @@ public class Cmd {
             specColumn = scanner.nextInt();
             System.out.print("Enter part number column offset: ");
             partNumberColumnOffset = scanner.nextInt();
+            scanner.nextLine();
 
             switch (chooseManufacturer) {
                 case 1:
-                    System.out.print("Enter the path where ExpressLuck BOM-files stored (path should be without spaces: ");
-                    path = scanner.next();
+                    System.out.print("Enter the path where ExpressLuck BOM-files stored: ");
+                    path = scanner.nextLine();
                     System.out.print("Enter sheet index (starts from 0) with BOM-list: ");
                     sheetIndex = scanner.nextInt();
 
@@ -55,8 +56,8 @@ public class Cmd {
                     break;
 
                 case 2:
-                    System.out.print("Enter the path where SVA BOM-files stored (path should be without spaces): ");
-                    path = scanner.next();
+                    System.out.print("Enter the path where SVA BOM-files stored: ");
+                    path = scanner.nextLine();
                     System.out.println(path);
 
                     try {
