@@ -4,6 +4,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import project.XlsxConverter.Exceptions.InvalidPathException;
+
 import java.io.*;
 import java.util.Iterator;
 
@@ -12,10 +14,13 @@ public class XlsxConverter {
     public static final int maxRowNum = 1024;
     private static final String processedDirectoryName = "\\done";
 
-    public static String convertFiles(String directoryPath) throws IOException, FileNotFoundException, InvalidFormatException {
+    public static String convertFiles(String directoryPath) throws IOException, InvalidFormatException, InvalidPathException {
         Long startTime = System.currentTimeMillis();
 
         File directory = new File(directoryPath);
+        if (!directory.exists())
+            throw new InvalidPathException();
+
 
         File directoryToDelete = new File(directoryPath + processedDirectoryName);
         if (directoryToDelete.exists()) {

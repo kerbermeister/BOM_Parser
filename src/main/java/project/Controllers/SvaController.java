@@ -14,6 +14,7 @@ import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
+import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +33,15 @@ public class SvaController implements Controller {
     }
 
     public void launch() throws IOException, FileNotFoundException, InvalidFormatException {
-        String processedFolder = XlsxConverter.convertFiles(config.getFilePath());
+        String processedFolder;
+
+        try {
+            processedFolder = XlsxConverter.convertFiles(config.getFilePath());
+        } catch (InvalidPathException e) {
+            System.out.println("/$ : ERROR!!! Path you entered does not exist!");
+            return;
+        }
+
         File folder = new File(processedFolder);
 
         File[] files = folder.listFiles();

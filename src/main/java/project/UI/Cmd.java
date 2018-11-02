@@ -35,7 +35,7 @@ public class Cmd {
 
             switch (chooseManufacturer) {
                 case 1:
-                    System.out.print("Enter the path where ExpressLuck BOM-files stored: ");
+                    System.out.print("Enter the path where ExpressLuck BOM-files stored (path should be without spaces: ");
                     path = scanner.next();
                     System.out.print("Enter sheet index (starts from 0) with BOM-list: ");
                     sheetIndex = scanner.nextInt();
@@ -43,7 +43,10 @@ public class Cmd {
                     try {
                         config = new Config(path, partNumberColumn, descColumn, specColumn, partNumberColumnOffset, sheetIndex);
                     } catch (IllegalColumnNumException e) {
-                        System.out.println("one of entered column is incorrect!");
+                        System.out.println("/$ : ERROR!!! One of entered column is incorrect!");
+                        System.out.println("/$ : 1) Columns should not be equal to each other!");
+                        System.out.println("/$ : 2) P/N column offset + P/N column should not be equal to DESC or SPEC column!");
+                        System.out.println("/$ : 3) P/N, DESC, SPEC columns should not be negative or equal to 0");
                         continue;
                     }
 
@@ -52,8 +55,9 @@ public class Cmd {
                     break;
 
                 case 2:
-                    System.out.print("Enter the path where SVA BOM-files stored: ");
+                    System.out.print("Enter the path where SVA BOM-files stored (path should be without spaces): ");
                     path = scanner.next();
+                    System.out.println(path);
 
                     try {
                         config = new Config(path, partNumberColumn, descColumn, specColumn, partNumberColumnOffset);
