@@ -32,6 +32,7 @@ public class TvPartsPatterns extends Patterns {
         mainBoardTemplates.add("mainboard");
         mainBoardTemplates.add("mainpcbassembly");
         mainBoardTemplates.add("mainpcbassy");
+        mainBoardTemplates.add("decoder board");
 
         powerBoardTemplates.add("power board");
 

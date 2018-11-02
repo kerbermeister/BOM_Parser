@@ -1,4 +1,4 @@
-package project;
+package project.XlsxConverter;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -8,8 +8,8 @@ import java.io.*;
 import java.util.Iterator;
 
 public class XlsxConverter {
-    private static final int maxColumnNum = 255;
-    private static final int maxRowNum = 1024;
+    public static final int maxColumnNum = 255;
+    public static final int maxRowNum = 1024;
     private static final String processedDirectoryName = "\\done";
 
     public static String convertFiles(String directoryPath) throws IOException, FileNotFoundException, InvalidFormatException {

@@ -14,7 +14,7 @@ import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
-import project.XlsxConverter;
+import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,14 +25,14 @@ import java.util.Map;
 
 public class ExLuckController implements Controller {
 
-    private ConfigEntity configEntity;
+    private Config config;
 
-    public ExLuckController(ConfigEntity configEntity) {
-        this.configEntity = configEntity;
+    public ExLuckController(Config config) {
+        this.config = config;
     }
 
     public void launch() throws FileNotFoundException, IOException, InvalidFormatException {
-        String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
+        String processedFolder = XlsxConverter.convertFiles(config.getFilePath());
         File folder = new File(processedFolder);
 
         File[] files = folder.listFiles();
@@ -44,7 +44,7 @@ public class ExLuckController implements Controller {
             ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
 
 
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(configEntity.getSheetIndex()), configEntity.getDescColumn()-1);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(config.getSheetIndex()), config.getDescColumn()-1);
 
 
 
@@ -57,10 +57,10 @@ public class ExLuckController implements Controller {
 
 
 
-            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
-                                                                configEntity.getDescColumn(),
-                                                                configEntity.getSpecColumn(),
-                                                                configEntity.getPartNumberColumnOffset());
+            BomBuilderImpl bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(),
+                                                                config.getDescColumn(),
+                                                                config.getSpecColumn(),
+                                                                config.getPartNumberColumnOffset());
 
             ArrayList<RowTemplate> rowTemplateArrayList = bomBuilderImpl.createRowTemplateList(map);
 

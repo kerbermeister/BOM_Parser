@@ -14,7 +14,7 @@ import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.FileSaver;
-import project.XlsxConverter;
+import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,14 +25,14 @@ import java.util.Map;
 
 public class SvaController implements Controller {
 
-    private ConfigEntity configEntity;
+    private Config config;
 
-    public SvaController(ConfigEntity configEntity) {
-        this.configEntity = configEntity;
+    public SvaController(Config config) {
+        this.config = config;
     }
 
     public void launch() throws IOException, FileNotFoundException, InvalidFormatException {
-        String processedFolder = XlsxConverter.convertFiles(configEntity.getFilePath());
+        String processedFolder = XlsxConverter.convertFiles(config.getFilePath());
         File folder = new File(processedFolder);
 
         File[] files = folder.listFiles();
@@ -48,19 +48,19 @@ public class SvaController implements Controller {
 
             for (int i = 0; i < numberOfSheets; i++) {
                 BomBuilderImpl bomBuilderImpl;
-                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn()-1);
+                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn()-1);
 
                 if (map.isEmpty()) {
-                    map = testMatcher.getMainParts(excelReader.getExcelList(i), configEntity.getDescColumn());
-                    bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn()+1,
-                            configEntity.getDescColumn()+1,
-                            configEntity.getSpecColumn()+1,
-                            configEntity.getPartNumberColumnOffset());
+                    map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
+                    bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn()+1,
+                            config.getDescColumn()+1,
+                            config.getSpecColumn()+1,
+                            config.getPartNumberColumnOffset());
                 } else {
-                    bomBuilderImpl = new BomBuilderImpl(configEntity.getPartNumberColumn(),
-                            configEntity.getDescColumn(),
-                            configEntity.getSpecColumn(),
-                            configEntity.getPartNumberColumnOffset());
+                    bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(),
+                            config.getDescColumn(),
+                            config.getSpecColumn(),
+                            config.getPartNumberColumnOffset());
                 }
 
 
