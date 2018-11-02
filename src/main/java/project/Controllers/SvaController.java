@@ -13,6 +13,7 @@ import project.Matchers.MatcherImpl;
 import project.Parts;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
+import project.Saver.Exceptions.EmptyFileToSaveException;
 import project.Saver.FileSaver;
 import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
@@ -89,7 +90,11 @@ public class SvaController implements Controller {
                 FileSaver fileSaver = new FileSaver(workbook, 0,
                         1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + "(" + fileNumber + ")" + ".xls");
                 rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
-                fileSaver.save(rowTemplateArrayList, processedFolder);
+                try {
+                    fileSaver.save(rowTemplateArrayList, processedFolder);
+                } catch (EmptyFileToSaveException e) {
+                    System.out.println("File " + file.getName() + " has a sheet without any founds");
+                }
 
 
 

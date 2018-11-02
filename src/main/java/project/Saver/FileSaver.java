@@ -4,6 +4,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import project.BomBuilder.RowTemplate;
+import project.Saver.Exceptions.EmptyFileToSaveException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,7 +41,10 @@ public class FileSaver {
 
     }
 
-    public boolean save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, FileNotFoundException {
+    public boolean save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, EmptyFileToSaveException {
+        if (rowTemplateList.isEmpty())
+            throw new EmptyFileToSaveException();
+
         int rowNum = 0;
         for (RowTemplate rowTemplate : rowTemplateList) {
             Row row = sheet.createRow(rowNum);
