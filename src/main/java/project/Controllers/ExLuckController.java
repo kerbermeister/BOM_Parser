@@ -18,7 +18,6 @@ import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +31,7 @@ public class ExLuckController implements Controller {
         this.config = config;
     }
 
-    public void launch() throws FileNotFoundException, IOException, InvalidFormatException {
+    public void launch() throws IOException, InvalidFormatException {
         String processedFolder;
 
         try{
@@ -53,7 +52,7 @@ public class ExLuckController implements Controller {
             ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
 
 
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(config.getSheetIndex()), config.getDescColumn()-1);
+            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(config.getSheetIndex()), config.getDescColumn());
 
 
 

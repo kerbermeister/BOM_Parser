@@ -28,7 +28,7 @@ public class XlsxConverter {
             System.out.println("/$ : the old processed directory and all the nested directories and files have been deleted recursively");
         }
 
-        if (new File(directoryPath + processedDirectoryName).mkdir() == true) {
+        if (new File(directoryPath + processedDirectoryName).mkdir()) {
             System.out.println("/$ : the new directory for processed files has been created");
         } else {
             System.out.println("/$ : ERROR!!! the directory for processed files could not be created");

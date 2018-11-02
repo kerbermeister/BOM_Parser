@@ -21,6 +21,7 @@ public class MatcherImpl implements Matcher {
     }
 
     public Map<Row, Parts> getMainParts(Iterator<Row> rowIterator, int descColumn) {
+        descColumn = descColumn-1;
         Map<Row, Parts> mainPartsRowTable = new HashMap<Row, Parts>();
 
         while (rowIterator.hasNext()) {
@@ -29,7 +30,6 @@ public class MatcherImpl implements Matcher {
             int currentColumn = 0;
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-//                cell.setCellType(CellType.STRING);
                 if (currentColumn != descColumn) {
                     currentColumn++;
                     continue;
@@ -41,10 +41,6 @@ public class MatcherImpl implements Matcher {
                     }
                     break;
                 }
-//                else {
-//                    currentColumn++;
-//                    break;
-//                }
             }
         }
         return mainPartsRowTable;

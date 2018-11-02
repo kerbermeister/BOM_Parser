@@ -18,7 +18,6 @@ import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,13 +31,13 @@ public class SvaController implements Controller {
         this.config = config;
     }
 
-    public void launch() throws IOException, FileNotFoundException, InvalidFormatException {
+    public void launch() throws IOException, InvalidFormatException {
         String processedFolder;
 
         try {
             processedFolder = XlsxConverter.convertFiles(config.getFilePath());
         } catch (InvalidPathException e) {
-            System.out.println("/$ : ERROR!!! Path you entered does not exist!");
+            System.out.println("/$ : ERROR!!! Provided path does not exist!");
             return;
         }
 
@@ -57,7 +56,7 @@ public class SvaController implements Controller {
 
             for (int i = 0; i < numberOfSheets; i++) {
                 BomBuilderImpl bomBuilderImpl;
-                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn()-1);
+                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
 
                 if (map.isEmpty()) {
                     map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
