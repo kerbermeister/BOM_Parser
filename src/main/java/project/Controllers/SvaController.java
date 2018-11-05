@@ -93,7 +93,7 @@ public class SvaController implements Controller {
                 try {
                     fileSaver.save(rowTemplateArrayList, processedFolder);
                 } catch (EmptyFileToSaveException e) {
-                    System.out.println("File " + file.getName() + " has a sheet without any founds");
+                    System.out.println("File " + file.getName() + " has a sheet without any founds, file has not been saved");
                 }
 
 
