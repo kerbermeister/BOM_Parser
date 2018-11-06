@@ -8,23 +8,31 @@ import java.util.Map;
 
 public class TvPartsPatterns extends Patterns {
 
-    private static final List<String> mainBoardTemplates = new ArrayList<String>();
-    private static final List<String> ledPanelTemplates = new ArrayList<String>();
-    private static final List<String> speakerTemplates = new ArrayList<String>();
-    private static final List<String> remoteControlTemplates = new ArrayList<String>();
-    private static final List<String> powerBoardTemplates = new ArrayList<String>();
-    private static final List<String> irBoardTemplates = new ArrayList<String>();
-    private static final List<String> controlBoardTemplates = new ArrayList<String>();
+    private final List<String> mainBoardTemplates;
+    private final List<String> ledPanelTemplates;
+    private final List<String> speakerTemplates;
+    private final List<String> remoteControlTemplates;
+    private final List<String> powerBoardTemplates;
+    private final List<String> irBoardTemplates;
+    private final List<String> controlBoardTemplates;
 
     private Map<List<String>, Parts> patternsMap;
 
-    public Map<List<String>, Parts> getPatternsMap() {
-        return patternsMap;
+    {
+        patternsMap = new HashMap<List<String>, Parts>();
+        mainBoardTemplates = new ArrayList<String>();
+        ledPanelTemplates = new ArrayList<String>();
+        speakerTemplates = new ArrayList<String>();
+        remoteControlTemplates = new ArrayList<String>();
+        powerBoardTemplates = new ArrayList<String>();
+        irBoardTemplates = new ArrayList<String>();
+        controlBoardTemplates = new ArrayList<String>();
+        initialize();
     }
 
-    public TvPartsPatterns() {
-        patternsMap = new HashMap<List<String>, Parts>();
-        initialize();
+    @Override
+    public Map<List<String>, Parts> getPatternsMap() {
+        return patternsMap;
     }
 
     private void initialize() {

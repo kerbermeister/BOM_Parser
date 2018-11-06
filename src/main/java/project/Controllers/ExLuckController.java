@@ -11,6 +11,7 @@ import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
 import project.Matchers.MatcherImpl;
 import project.Parts;
+import project.PartsPatterns.AmsSystemsPatterns;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.Exceptions.EmptyFileToSaveException;

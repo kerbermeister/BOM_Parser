@@ -10,7 +10,8 @@ import project.BomBuilder.Sections;
 
 public enum Parts {
     MAINBOARD(3, Sections.DEN.name()), POWER_BOARD(3, Sections.PSU.name()), SPEAKER(3, Sections.SPK.name()),
-    RMC(2, Sections.RMC.name()), LCD(5, Sections.LCD.name()), CONTROL_BOARD(3, Sections.CTR.name()), IR_BOARD(3, Sections.IRD.name());
+    RMC(2, Sections.RMC.name()), LCD(5, Sections.LCD.name()), CONTROL_BOARD(3, Sections.CTR.name()), IR_BOARD(3, Sections.IRD.name()),
+    DISPLAY_BOARD(3, Sections.IDS.name()), USB(3, Sections.USB.name()), CD_MECHANISM(3, Sections.CDS.name());
 
     private int repairLevel;
     private String section;

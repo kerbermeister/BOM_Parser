@@ -22,5 +22,9 @@ public class PatternsToIgnore {
         ignoreList.add("pad");
         ignoreList.add("antivibration");
         ignoreList.add("support");
+        ignoreList.add("shelf");
+        ignoreList.add("back");
+        ignoreList.add("cover");
+        ignoreList.add("sticker");
     }
 }

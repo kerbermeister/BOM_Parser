@@ -1,5 +1,5 @@
 package project.BomBuilder;
 
 public enum Sections {
-    UNI, DEN, SPK, LCD, PSU, RMC, DEFAULT, IRD, CTR
+    UNI, DEFAULT, DEN, SPK, LCD, PSU, RMC, IRD, CTR, CDS, USB, IDS
 }
