@@ -21,7 +21,6 @@ public class XlsxConverter {
         if (!directory.exists())
             throw new InvalidPathException();
 
-
         File directoryToDelete = new File(directoryPath + processedDirectoryName);
         if (directoryToDelete.exists()) {
             deleteProcessedDirectory(directoryToDelete);
@@ -101,6 +100,9 @@ public class XlsxConverter {
                 }
                 sheetNum++;
             }
+
+//            String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
+//            fileName = fileName.replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,\\s,\\(,\\),\\_]", "");
             File outputFile = new File(directoryPath + processedDirectoryName + "\\" + "(" + fileNumber + ")" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             hssfWorkbook.write(fileOutputStream);

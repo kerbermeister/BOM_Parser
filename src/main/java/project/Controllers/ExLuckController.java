@@ -16,6 +16,7 @@ import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.Exceptions.EmptyFileToSaveException;
 import project.Saver.FileSaver;
+import project.XlsxConverter.Exceptions.IllegalSheetIndexException;
 import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
 import java.io.File;
@@ -52,10 +53,14 @@ public class ExLuckController implements Controller {
         for (File file : files) {
             FileInputStream fis = new FileInputStream(file);
             ExcelReader excelReader = new ExcelReader(new HSSFWorkbook(fis));
+            Map<Row, Parts> map;
 
-
-            Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(config.getSheetIndex()), config.getDescColumn());
-
+            try {
+                map = testMatcher.getMainParts(excelReader.getExcelList(config.getSheetIndex()), config.getDescColumn());
+            } catch (IllegalSheetIndexException e) {
+                System.out.println("/$ : ERROR!!! Sheet number you specified does not exist in file " + file.getName());
+                return;
+            }
 
 
 

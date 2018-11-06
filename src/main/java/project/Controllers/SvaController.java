@@ -15,6 +15,7 @@ import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 import project.Saver.Exceptions.EmptyFileToSaveException;
 import project.Saver.FileSaver;
+import project.XlsxConverter.Exceptions.IllegalSheetIndexException;
 import project.XlsxConverter.Exceptions.InvalidPathException;
 import project.XlsxConverter.XlsxConverter;
 import java.io.File;
@@ -57,19 +58,26 @@ public class SvaController implements Controller {
 
             for (int i = 0; i < numberOfSheets; i++) {
                 BomBuilderImpl bomBuilderImpl;
-                Map<Row, Parts> map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
+                Map<Row, Parts> map;
 
-                if (map.isEmpty()) {
+                try {
                     map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
-                    bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn()+1,
-                            config.getDescColumn()+1,
-                            config.getSpecColumn()+1,
-                            config.getPartNumberColumnOffset());
-                } else {
-                    bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(),
-                            config.getDescColumn(),
-                            config.getSpecColumn(),
-                            config.getPartNumberColumnOffset());
+
+                    if (map.isEmpty()) {
+                        map = testMatcher.getMainParts(excelReader.getExcelList(i), config.getDescColumn());
+                        bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn()+1,
+                                config.getDescColumn()+1,
+                                config.getSpecColumn()+1,
+                                config.getPartNumberColumnOffset());
+                    } else {
+                        bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(),
+                                config.getDescColumn(),
+                                config.getSpecColumn(),
+                                config.getPartNumberColumnOffset());
+                    }
+                } catch (IllegalSheetIndexException e) {
+                    System.out.println("/$ : ERROR!!! Sheet number you specified does not exist in file " + file.getName());
+                    return;
                 }
 
 

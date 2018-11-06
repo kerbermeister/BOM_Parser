@@ -7,7 +7,6 @@ import project.Saver.Exceptions.EmptyFileToSaveException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 public class FileSaver {
@@ -40,9 +39,11 @@ public class FileSaver {
 
     }
 
-    public boolean save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, EmptyFileToSaveException {
-        if (rowTemplateList.isEmpty())
+    public void save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, EmptyFileToSaveException {
+        if (rowTemplateList.isEmpty()) {
             throw new EmptyFileToSaveException();
+        }
+
 
         int rowNum = 0;
         for (RowTemplate rowTemplate : rowTemplateList) {
@@ -65,7 +66,6 @@ public class FileSaver {
         workbook.write(fileOutputStream);
         System.out.println("file has been saved");
         fileOutputStream.close();
-        return true;
     }
 
     private void addCustomRowTemplate() {
