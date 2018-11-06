@@ -18,6 +18,7 @@ public class FileSaver {
     private int descColumn;
     private int specColumn;
     private int repairLvlColumn;
+    private String fileName;
     private final int COLUMN_QTY = 15;
 
     public FileSaver(Workbook workbook,
@@ -27,7 +28,8 @@ public class FileSaver {
                      int descColumn,
                      int specColumn,
                      int repairLvlColumn,
-                     String sheetName) {
+                     String sheetName,
+                     String fileName) {
         this.workbook = workbook;
         this.sectionColumn = sectionColumn;
         this.sectionPartColumn = sectionPartColumn;
@@ -36,7 +38,7 @@ public class FileSaver {
         this.specColumn = specColumn;
         this.repairLvlColumn = repairLvlColumn;
         this.sheet = workbook.createSheet(sheetName);
-
+        this.fileName = fileName;
     }
 
     public void save(List<RowTemplate> rowTemplateList, String folderToSave) throws IOException, EmptyFileToSaveException {
@@ -59,13 +61,12 @@ public class FileSaver {
 
 
         addCustomRowTemplate();
-        String sheetName = sheet.getSheetName().replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,\\s,\\(,\\),\\_]", "");
-        File file = new File(folderToSave + "BOM_" + sheetName);
+        File file = new File(folderToSave + "BOM_" + fileName);
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         workbook.write(fileOutputStream);
         System.out.println("file " + file.getName() + " has been saved");
-        System.out.println("------------------------------------------------------------------------");
+
         fileOutputStream.close();
     }
 

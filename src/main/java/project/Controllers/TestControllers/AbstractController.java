@@ -62,20 +62,23 @@ public abstract class AbstractController {
                     return;
                 }
 
-                System.out.println("Total parts from file " + file.getName() + " sheet #(" + i + ") found: " + rowTemplateArrayList.size());
-                System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
+                System.out.println("#" + i + " sheet from file " + file.getName() + " processed, total parts found: " + rowTemplateArrayList.size());
+
                 Workbook workbook = new HSSFWorkbook();
 
                 FileSaver fileSaver = new FileSaver(workbook, 0,
-                        1 , 4 , 5, 6 , 13,  "#" + i + file.getName() );
+                        1 , 4 , 5, 6 , 13,  excelReader.getSheetName(i), "#" + i + " " + file.getName());
 
 
 
                 rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
                 try {
                     fileSaver.save(rowTemplateArrayList, processedFolder);
+                    System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
+                    System.out.println("------------------------------------------------------------------------");
                 } catch (EmptyFileToSaveException e) {
                     System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") without any founds, file has not been saved");
+                    System.out.println("------------------------------------------------------------------------");
                 }
 
 //                for (RowTemplate rowTemplate : rowTemplateArrayList) {
