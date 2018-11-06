@@ -63,10 +63,14 @@ public abstract class AbstractController {
                 }
 
                 System.out.println("Total parts from file " + file.getName() + " sheet #(" + i + ") found: " + rowTemplateArrayList.size());
+                System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
                 Workbook workbook = new HSSFWorkbook();
 
                 FileSaver fileSaver = new FileSaver(workbook, 0,
-                        1 , 4 , 5, 6 , 13, excelReader.getSheetName(i) + "(" + fileNumber + ")" + ".xls");
+                        1 , 4 , 5, 6 , 13,  "#" + i + file.getName() );
+
+
+
                 rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
                 try {
                     fileSaver.save(rowTemplateArrayList, processedFolder);
