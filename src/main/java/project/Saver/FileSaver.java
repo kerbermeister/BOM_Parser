@@ -59,8 +59,8 @@ public class FileSaver {
 
 
         addCustomRowTemplate();
-
-        File file = new File(folderToSave + "BOM_" + sheet.getSheetName().toUpperCase());
+        String sheetName = sheet.getSheetName().replaceAll("[^A-Za-zА-Яа-я-^0-9-/.-/,\\s,\\(,\\),\\_]", "");
+        File file = new File(folderToSave + "BOM_" + sheetName);
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         workbook.write(fileOutputStream);
