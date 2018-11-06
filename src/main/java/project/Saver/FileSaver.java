@@ -1,15 +1,13 @@
 package project.Saver;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import project.BomBuilder.RowTemplate;
 import project.Saver.Exceptions.EmptyFileToSaveException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 public class FileSaver {
@@ -21,6 +19,7 @@ public class FileSaver {
     private int descColumn;
     private int specColumn;
     private int repairLvlColumn;
+    private final int COLUMN_QTY = 15;
 
     public FileSaver(Workbook workbook,
                      int sectionColumn,
@@ -47,13 +46,13 @@ public class FileSaver {
 
         int rowNum = 0;
         for (RowTemplate rowTemplate : rowTemplateList) {
-            Row row = sheet.createRow(rowNum);
-            row.createCell(sectionColumn).setCellValue(rowTemplate.getSection());
-            row.createCell(sectionPartColumn).setCellValue(rowTemplate.getSectionPart());
-            row.createCell(partNumberColumn).setCellValue(rowTemplate.getPart());
-            row.createCell(descColumn).setCellValue(rowTemplate.getDesc());
-            row.createCell(specColumn).setCellValue(rowTemplate.getSpec());
-            row.createCell(repairLvlColumn).setCellValue(rowTemplate.getRl());
+            Row row = createEmptyRow(sheet.createRow(rowNum));
+            row.getCell(sectionColumn).setCellValue(rowTemplate.getSection());
+            row.getCell(sectionPartColumn).setCellValue(rowTemplate.getSectionPart());
+            row.getCell(partNumberColumn).setCellValue(rowTemplate.getPart());
+            row.getCell(descColumn).setCellValue(rowTemplate.getDesc());
+            row.getCell(specColumn).setCellValue(rowTemplate.getSpec());
+            row.getCell(repairLvlColumn).setCellValue(rowTemplate.getRl());
             rowNum++;
         }
 
@@ -70,7 +69,7 @@ public class FileSaver {
     }
 
     private void addCustomRowTemplate() {
-        Row row = sheet.createRow(sheet.getLastRowNum()+1);
+        Row row = createEmptyRow(sheet.createRow(sheet.getLastRowNum()+1));
         row.createCell(sectionColumn).setCellValue("UNI");
         row.createCell(sectionPartColumn).setCellValue("P-LEVEL4");
         row.createCell(partNumberColumn).setCellValue("P-LEVEL4");
@@ -78,13 +77,21 @@ public class FileSaver {
         row.createCell(specColumn).setCellValue("for C, D, R, L");
         row.createCell(repairLvlColumn).setCellValue("4");
 
-        row = sheet.createRow(sheet.getLastRowNum()+1);
+        row = createEmptyRow(sheet.createRow(sheet.getLastRowNum()+1));
         row.createCell(sectionColumn).setCellValue("UNI");
         row.createCell(sectionPartColumn).setCellValue("P-LEVEL4");
         row.createCell(partNumberColumn).setCellValue("P-LEVEL5");
         row.createCell(descColumn).setCellValue("for IC, CPU");
         row.createCell(specColumn).setCellValue("for IC, CPU");
         row.createCell(repairLvlColumn).setCellValue("5");
+    }
+
+    private Row createEmptyRow(Row row) {
+        for (int i = 0; i <= COLUMN_QTY-1; i++) {
+            Cell cell = row.createCell(i);
+            cell.setCellType(CellType.STRING);
+        }
+        return row;
     }
 
 }
