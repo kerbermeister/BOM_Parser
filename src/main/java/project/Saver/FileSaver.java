@@ -64,7 +64,7 @@ public class FileSaver {
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         workbook.write(fileOutputStream);
-        System.out.println("file has been saved");
+        System.out.println("file " + file.getName() + " has been saved");
         fileOutputStream.close();
     }
 

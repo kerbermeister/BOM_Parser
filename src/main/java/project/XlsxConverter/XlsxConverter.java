@@ -31,6 +31,7 @@ public class XlsxConverter {
             System.out.println("/$ : the new directory for processed files has been created");
         } else {
             System.out.println("/$ : ERROR!!! the directory for processed files could not be created");
+
         }
 
         File[] files = directory.listFiles();
@@ -54,6 +55,7 @@ public class XlsxConverter {
             } else {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 workbook = new HSSFWorkbook(fileInputStream);
+                fileInputStream.close();
             }
 
             System.out.println("/$ : converting " + file.getName() + "...");
