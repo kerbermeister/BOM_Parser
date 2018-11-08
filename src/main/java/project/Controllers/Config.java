@@ -10,6 +10,7 @@ public class Config {
     private int descColumn;
     private int specColumn;
     private int partNumberColumnOffset;
+    @Deprecated
     private int sheetIndex;
 
     public Config(String filePath, int partNumberColumn, int descColumn, int specColumn, int partNumberColumnOffset) throws IllegalColumnNumException {
@@ -20,6 +21,7 @@ public class Config {
         setPartNumberColumnOffset(partNumberColumnOffset);
     }
 
+    @Deprecated
     public Config(String filePath, int partNumberColumn, int descColumn, int specColumn, int partNumberColumnOffset, int sheetIndex) throws IllegalColumnNumException {
         this.filePath = filePath;
         setPartNumberColumn(partNumberColumn);

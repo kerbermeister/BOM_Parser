@@ -6,7 +6,7 @@
 package project.BomBuilder;
 
 public class RowTemplate {
-    String section, sectionPart, no, no2, part, desc, spec, unit, qty, loc, manuf, remark, modify, rl, status;
+    private String section, sectionPart, no, no2, part, desc, spec, unit, qty, loc, manuf, remark, modify, rl, status;
 
     public String getSection() {
         return section;
