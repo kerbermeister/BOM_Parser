@@ -32,7 +32,6 @@ public class MatcherImpl implements Matcher {
                 Cell cell = cellIterator.next();
                 if (currentColumn != descColumn) {
                     currentColumn++;
-                    continue;
                 } else if (currentColumn == descColumn){
                     Parts partType = checkCell(cell);
                     currentColumn++;
@@ -59,12 +58,10 @@ public class MatcherImpl implements Matcher {
                 String cellStringForComparing = cellString.toLowerCase().replaceAll("[^A-Za-zА-Яа-я]", "");
                 if (cellStringForComparing.
                         contains(str.toLowerCase())) {
-                    for (String ignore : PatternsToIgnore.ignoreList) {
+                    for (String ignore : patternsToIgnore.getIgnoreList()) {
                         ignore = ignore.replaceAll("[^A-Za-zА-Яа-я]", "");
                         if (cellStringForComparing.contains(ignore.toLowerCase())) {
                             return  null;
-                        } else {
-                            continue;
                         }
                     }
                     return partType;

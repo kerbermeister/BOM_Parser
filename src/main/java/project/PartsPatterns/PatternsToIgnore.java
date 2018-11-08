@@ -5,9 +5,14 @@ import java.util.List;
 
 public class PatternsToIgnore {
 
-    public static final List<String> ignoreList = new ArrayList<String>();
+    private final List<String> ignoreList;
 
     {
+        ignoreList = new ArrayList<String>();
+        initialize();
+    }
+
+    private void initialize() {
         ignoreList.add("cabinet");
         ignoreList.add("bracket");
         ignoreList.add("wire");
@@ -30,5 +35,9 @@ public class PatternsToIgnore {
         ignoreList.add("insert");
         ignoreList.add("bar");
         ignoreList.add("matched");
+    }
+
+    public List<String> getIgnoreList() {
+        return ignoreList;
     }
 }

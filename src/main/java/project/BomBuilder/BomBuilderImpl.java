@@ -54,5 +54,4 @@ public class BomBuilderImpl extends AbstractBomBuilder {
         rowTemplate.setSectionPart(partNumber);
         return rowTemplate;
     }
-
 }
