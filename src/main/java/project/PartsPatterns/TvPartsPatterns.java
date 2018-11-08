@@ -43,6 +43,7 @@ public class TvPartsPatterns extends Patterns {
         mainBoardTemplates.add("decoder board");
 
         powerBoardTemplates.add("power board");
+        powerBoardTemplates.add("power supply board");
 
         ledPanelTemplates.add("lcd");
         ledPanelTemplates.add("lcm");
@@ -60,6 +61,7 @@ public class TvPartsPatterns extends Patterns {
 
         controlBoardTemplates.add("control board");
         controlBoardTemplates.add("KEY board");
+        controlBoardTemplates.add("Remote control PCB");
 
         patternsMap.put(mainBoardTemplates, Parts.MAINBOARD);
         patternsMap.put(speakerTemplates, Parts.SPEAKER);
