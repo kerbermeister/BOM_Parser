@@ -1,4 +1,4 @@
-package project.Controllers.TestControllers.Exceptions;
+package project.Controllers.Exceptions;
 
 public class EmptyProcessedFolderException extends Exception {
 }

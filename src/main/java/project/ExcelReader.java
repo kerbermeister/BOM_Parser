@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class ExcelReader {
     private Workbook workbook;
 
-    public ExcelReader(Workbook workbook) throws IOException {
+    public ExcelReader(Workbook workbook) {
         this.workbook = workbook;
     }
 
@@ -21,7 +21,6 @@ public class ExcelReader {
     public Iterator<Row> getExcelList(int sheetIndex) throws IllegalSheetIndexException {
         if (sheetIndex + 1 > workbook.getNumberOfSheets())
             throw new IllegalSheetIndexException();
-
         return workbook.getSheetAt(sheetIndex).rowIterator();
     }
 

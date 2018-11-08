@@ -1,9 +1,9 @@
-package project.Controllers.TestControllers;
+package project.Controllers;
 
 import org.apache.poi.ss.usermodel.Row;
+import project.BomBuilder.AbstractBomBuilder;
 import project.BomBuilder.BomBuilderImpl;
 import project.BomBuilder.RowTemplate;
-import project.Controllers.Config;
 import project.ExcelReader;
 import project.Matchers.Matcher;
 import project.Parts;
@@ -18,17 +18,16 @@ public class OneSheetController extends AbstractController {
 
     public OneSheetController(Config config, Patterns patterns, PatternsToIgnore patternsToIgnore) {
         super(config, patterns, patternsToIgnore);
-
     }
 
     protected ArrayList<RowTemplate> processFile(ExcelReader excelReader, Matcher matcher, int sheetindex) throws IllegalSheetIndexException {
-        BomBuilderImpl bomBuilderImpl;
+        AbstractBomBuilder bomBuilder;
         Map<Row, Parts> map;
 
         map = matcher.getMainParts(excelReader.getExcelList(sheetindex), config.getDescColumn());
 
-        bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(), config.getDescColumn(), config.getSpecColumn(), config.getPartNumberColumnOffset());
+        bomBuilder = new BomBuilderImpl(config.getPartNumberColumn(), config.getDescColumn(), config.getSpecColumn(), config.getPartNumberColumnOffset());
 
-        return bomBuilderImpl.createRowTemplateList(map);
+        return bomBuilder.createRowTemplateList(map);
     }
 }

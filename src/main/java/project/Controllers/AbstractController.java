@@ -1,11 +1,10 @@
-package project.Controllers.TestControllers;
+package project.Controllers;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import project.BomBuilder.RowTemplate;
-import project.Controllers.Config;
-import project.Controllers.TestControllers.Exceptions.EmptyProcessedFolderException;
+import project.Controllers.Exceptions.EmptyProcessedFolderException;
 import project.ExcelReader;
 import project.Formatters.TextFormatter;
 import project.Matchers.Matcher;
@@ -82,7 +81,7 @@ public abstract class AbstractController {
                     System.out.println("------------------------------------------------------------------------");
                 } catch (EmptyFileToSaveException e) {
                     notSavedFiles.put(excelReader.getSheetName(i), file.getName());
-                    System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") without any founds, file has not been saved");
+                    System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") '" + excelReader.getSheetName(i) + "' without any founds, file has not been saved");
                     System.out.println("------------------------------------------------------------------------");
                 }
 
@@ -94,7 +93,7 @@ public abstract class AbstractController {
             if (!notSavedFiles.isEmpty()) {
                 System.out.println("/$ : Not saved sheets/files: ");
                 for (Map.Entry entry : notSavedFiles.entrySet()) {
-                    System.out.println(entry.getKey() + " | file name: " + entry.getValue());
+                    System.out.println("'" + entry.getKey() + "'" + " | file name: " + entry.getValue());
                 }
             }
         }

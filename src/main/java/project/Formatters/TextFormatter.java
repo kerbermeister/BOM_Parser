@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public final class TextFormatter {
 
-    public static String deleteChineseSymbols(String s) {
+    private static String format(String s) {
         if (s.contains("Ω")) {
             s = s.replaceAll("Ω", " Ohm");
         }
@@ -17,11 +17,11 @@ public final class TextFormatter {
         ArrayList<RowTemplate> formattedRowTemplateList = new ArrayList<RowTemplate>();
         for (RowTemplate rowTemplate : rowTemplateList ) {
             String cellString = rowTemplate.getDesc();
-            cellString = deleteChineseSymbols(cellString);
+            cellString = format(cellString);
             rowTemplate.setDesc(cellString);
 
             cellString = rowTemplate.getSpec();
-            cellString = deleteChineseSymbols(cellString);
+            cellString = format(cellString);
             rowTemplate.setSpec(cellString);
             formattedRowTemplateList.add(rowTemplate);
         }

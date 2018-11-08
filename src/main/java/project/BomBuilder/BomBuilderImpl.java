@@ -16,6 +16,7 @@ public class BomBuilderImpl extends AbstractBomBuilder {
         this.partNumberColumnOffset = partNumberColumnOffset;
     }
 
+    @Override
     public ArrayList<RowTemplate> createRowTemplateList(Map<Row, Parts> mainPartsMap) {
         ArrayList<RowTemplate> rowTemplatesList = new ArrayList<RowTemplate>();
 

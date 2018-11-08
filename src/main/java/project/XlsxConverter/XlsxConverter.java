@@ -15,7 +15,7 @@ public class XlsxConverter {
     private static final String processedDirectoryName = "\\done";
 
     public static String convertFiles(String directoryPath) throws IOException, InvalidFormatException, InvalidPathException {
-        Long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
 
         File directory = new File(directoryPath);
         if (!directory.exists())
@@ -108,13 +108,13 @@ public class XlsxConverter {
             hssfWorkbook.write(fileOutputStream);
             fileOutputStream.close();
 
-            Long fileProcessingEndTime = System.currentTimeMillis();
-            Long totalFileProcessingTime = fileProcessingEndTime - fileProcessingStartTime;
+            long fileProcessingEndTime = System.currentTimeMillis();
+            long totalFileProcessingTime = fileProcessingEndTime - fileProcessingStartTime;
             System.out.println("/$ : file " + file.getName() + " has been succesfully converted and saved as " + outputFile.getName() + ", it took " + totalFileProcessingTime + " ms");
             fileNumber++;
         }
-        Long endTime = System.currentTimeMillis();
-        Long totalWorkingTime = (endTime - startTime);
+        long endTime = System.currentTimeMillis();
+        long totalWorkingTime = (endTime - startTime);
         System.out.println("/$ : Convertation has finished, total time is : " + totalWorkingTime + " ms");
         return directoryPath + processedDirectoryName + "\\";
     }

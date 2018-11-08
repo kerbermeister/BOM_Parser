@@ -3,8 +3,8 @@ package project.UI;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import project.Controllers.Config;
 import project.Controllers.Exceptions.IllegalColumnNumException;
-import project.Controllers.TestControllers.AbstractController;
-import project.Controllers.TestControllers.OneSheetController;
+import project.Controllers.AbstractController;
+import project.Controllers.OneSheetController;
 import project.PartsPatterns.PatternsToIgnore;
 import project.PartsPatterns.TvPartsPatterns;
 
