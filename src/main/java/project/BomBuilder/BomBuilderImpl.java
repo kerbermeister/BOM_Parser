@@ -20,12 +20,9 @@ public class BomBuilderImpl extends AbstractBomBuilder {
     public ArrayList<RowTemplate> createRowTemplateList(Map<Row, Parts> mainPartsMap) {
         ArrayList<RowTemplate> rowTemplatesList = new ArrayList<RowTemplate>();
 
-        Set<Map.Entry<Row, Parts>> set = mainPartsMap.entrySet();
-        Iterator<Map.Entry<Row, Parts>> iterator = set.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Row, Parts> entry = iterator.next();
-            Parts partType = entry.getValue();
-            Row row = entry.getKey();
+        for (Map.Entry entry : mainPartsMap.entrySet()) {
+            Row row = (Row) entry.getKey();
+            Parts partType = (Parts) entry.getValue();
             RowTemplate rowTemplate = buildBomRow(row, partNumberColumn, descColumn, specColumn, partType);
             rowTemplatesList.add(rowTemplate);
         }
