@@ -44,6 +44,7 @@ public class TestCmd {
 
             AbstractController controller = new OneSheetController(config, new TvPartsPatterns(), new PatternsToIgnore());
             controller.launch();
+            System.out.println();
         }
     }
 }

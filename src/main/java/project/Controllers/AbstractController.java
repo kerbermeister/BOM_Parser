@@ -103,7 +103,7 @@ public abstract class AbstractController {
 
     private String convertFilesToXls(String path) throws IOException, InvalidFormatException {
         try {
-            return XlsxConverter.convertFiles(config.getFilePath());
+            return XlsxConverter.convertFiles(path);
         } catch (InvalidPathException e) {
             System.out.println("/$ : ERROR!!! Provided path does not exist!");
             return null;
