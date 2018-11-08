@@ -20,9 +20,7 @@ import project.XlsxConverter.XlsxConverter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractController {
 
@@ -48,7 +46,8 @@ public abstract class AbstractController {
 
         Matcher matcher = new MatcherImpl(patterns, patternsToIgnore);
         int savedFiles = 0;
-        Map<String, String> notSavedFiles = new HashMap<String, String>();
+        int notSavedFiles = 0;
+        List<String> notSavedFilesList = new LinkedList<String>();
 
         for (File file : convertedFiles) {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -80,7 +79,8 @@ public abstract class AbstractController {
                     System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
                     System.out.println("------------------------------------------------------------------------");
                 } catch (EmptyFileToSaveException e) {
-                    notSavedFiles.put(excelReader.getSheetName(i), file.getName());
+                    notSavedFilesList.add("'" + excelReader.getSheetName(i) + "'" + " | file name: " + file.getName());
+                    notSavedFiles++;
                     System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") '" + excelReader.getSheetName(i) + "' without any founds, file has not been saved");
                     System.out.println("------------------------------------------------------------------------");
                 }
@@ -89,12 +89,12 @@ public abstract class AbstractController {
             fileInputStream.close();
 
             System.out.println("/$ : Total files saved: " + savedFiles);
-
-            if (!notSavedFiles.isEmpty()) {
-                System.out.println("/$ : Not saved sheets/files: ");
-                for (Map.Entry entry : notSavedFiles.entrySet()) {
-                    System.out.println("'" + entry.getKey() + "'" + " | file name: " + entry.getValue());
-                }
+            System.out.println("/$ : Total files NOT saved: " + notSavedFiles);
+        }
+        if (!notSavedFilesList.isEmpty()) {
+            System.out.println("/$ : Not saved sheets/files: ");
+            for (String str : notSavedFilesList) {
+                System.out.println(str);
             }
         }
     }
