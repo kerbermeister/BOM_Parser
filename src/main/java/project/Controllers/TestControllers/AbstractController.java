@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractController {
 
@@ -46,7 +48,9 @@ public abstract class AbstractController {
         }
 
         Matcher matcher = new MatcherImpl(patterns, patternsToIgnore);
-        int fileNumber = 1;
+        int savedFiles = 0;
+
+        Map<String, String> notSavedFiles = new HashMap<String, String>();
 
         for (File file : convertedFiles) {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -74,9 +78,11 @@ public abstract class AbstractController {
                 rowTemplateArrayList = TextFormatter.formatCells(rowTemplateArrayList);
                 try {
                     fileSaver.save(rowTemplateArrayList, processedFolder);
+                    savedFiles++;
                     System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
                     System.out.println("------------------------------------------------------------------------");
                 } catch (EmptyFileToSaveException e) {
+                    notSavedFiles.put(excelReader.getSheetName(i), file.getName());
                     System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") without any founds, file has not been saved");
                     System.out.println("------------------------------------------------------------------------");
                 }
@@ -91,7 +97,13 @@ public abstract class AbstractController {
 //                    System.out.println("-----");
 //                }
             }
-            fileNumber++;
+            System.out.println("/$ : Total files saved: " + savedFiles);
+            System.out.println("/$ : Not saved sheets/files: ");
+
+            for (Map.Entry entry : notSavedFiles.entrySet()) {
+                System.out.println(entry.getKey() + " | file name: " + entry.getValue());
+            }
+
             fileInputStream.close();
         }
     }

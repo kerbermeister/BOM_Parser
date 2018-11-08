@@ -46,7 +46,6 @@ public class FileSaver {
             throw new EmptyFileToSaveException();
         }
 
-
         int rowNum = 0;
         for (RowTemplate rowTemplate : rowTemplateList) {
             Row row = createEmptyRow(sheet.createRow(rowNum));
@@ -58,7 +57,6 @@ public class FileSaver {
             row.getCell(repairLvlColumn).setCellValue(rowTemplate.getRl());
             rowNum++;
         }
-
 
         addCustomRowTemplate();
         File file = new File(folderToSave + "BOM_" + fileName);
@@ -95,5 +93,4 @@ public class FileSaver {
         }
         return row;
     }
-
 }

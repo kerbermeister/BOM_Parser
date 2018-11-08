@@ -27,5 +27,8 @@ public class PatternsToIgnore {
         ignoreList.add("cover");
         ignoreList.add("sticker");
         ignoreList.add("label");
+        ignoreList.add("insert");
+        ignoreList.add("bar");
+        ignoreList.add("matched");
     }
 }

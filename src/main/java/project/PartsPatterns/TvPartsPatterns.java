@@ -23,10 +23,10 @@ public class TvPartsPatterns extends Patterns {
         mainBoardTemplates = new ArrayList<String>();
         ledPanelTemplates = new ArrayList<String>();
         speakerTemplates = new ArrayList<String>();
+        controlBoardTemplates = new ArrayList<String>();
         remoteControlTemplates = new ArrayList<String>();
         powerBoardTemplates = new ArrayList<String>();
         irBoardTemplates = new ArrayList<String>();
-        controlBoardTemplates = new ArrayList<String>();
         initialize();
     }
 
@@ -53,22 +53,22 @@ public class TvPartsPatterns extends Patterns {
         ledPanelTemplates.add("lcm-panel");
         ledPanelTemplates.add("open cell");
 
+        controlBoardTemplates.add("control board");
+        controlBoardTemplates.add("KEY board");
+
         speakerTemplates.add("speaker");
+
+        irBoardTemplates.add("IR board");
+        irBoardTemplates.add("remote control pcb");
 
         remoteControlTemplates.add("remote control");
 
-        irBoardTemplates.add("IR board");
-
-        controlBoardTemplates.add("control board");
-        controlBoardTemplates.add("KEY board");
-        controlBoardTemplates.add("Remote control PCB");
-
         patternsMap.put(mainBoardTemplates, Parts.MAINBOARD);
         patternsMap.put(speakerTemplates, Parts.SPEAKER);
+        patternsMap.put(irBoardTemplates, Parts.IR_BOARD);
         patternsMap.put(ledPanelTemplates, Parts.LCD);
+        patternsMap.put(controlBoardTemplates, Parts.CONTROL_BOARD);
         patternsMap.put(remoteControlTemplates, Parts.RMC);
         patternsMap.put(powerBoardTemplates, Parts.POWER_BOARD);
-        patternsMap.put(irBoardTemplates, Parts.IR_BOARD);
-        patternsMap.put(controlBoardTemplates, Parts.CONTROL_BOARD);
     }
 }
