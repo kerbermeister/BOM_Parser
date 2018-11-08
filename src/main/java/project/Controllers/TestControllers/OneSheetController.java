@@ -12,7 +12,6 @@ import project.PartsPatterns.PatternsToIgnore;
 import project.XlsxConverter.Exceptions.IllegalSheetIndexException;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 public class OneSheetController extends AbstractController {
@@ -28,24 +27,7 @@ public class OneSheetController extends AbstractController {
 
         map = matcher.getMainParts(excelReader.getExcelList(sheetindex), config.getDescColumn());
 
-        if (map.isEmpty()) {
-            map = matcher.getMainParts(excelReader.getExcelList(sheetindex), config.getDescColumn());
-            bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn()+1,
-                    config.getDescColumn()+1,
-                    config.getSpecColumn()+1,
-                    config.getPartNumberColumnOffset());
-            } else {
-            bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(),
-                    config.getDescColumn(),
-                    config.getSpecColumn(),
-                    config.getPartNumberColumnOffset());
-            }
-
-//        Iterator<Row> iterator = map.keySet().iterator();
-//        while (iterator.hasNext()) {
-//            Row row = iterator.next();
-//            System.out.println("part: " + row + " | " + map.get(row));
-//        }
+        bomBuilderImpl = new BomBuilderImpl(config.getPartNumberColumn(), config.getDescColumn(), config.getSpecColumn(), config.getPartNumberColumnOffset());
 
         return bomBuilderImpl.createRowTemplateList(map);
     }

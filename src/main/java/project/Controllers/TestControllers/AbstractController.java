@@ -49,7 +49,6 @@ public abstract class AbstractController {
 
         Matcher matcher = new MatcherImpl(patterns, patternsToIgnore);
         int savedFiles = 0;
-
         Map<String, String> notSavedFiles = new HashMap<String, String>();
 
         for (File file : convertedFiles) {
@@ -87,24 +86,17 @@ public abstract class AbstractController {
                     System.out.println("------------------------------------------------------------------------");
                 }
 
-//                for (RowTemplate rowTemplate : rowTemplateArrayList) {
-//                    System.out.println(rowTemplate.getSection());
-//                    System.out.println(rowTemplate.getSectionPart());
-//                    System.out.println(rowTemplate.getPart());
-//                    System.out.println(rowTemplate.getDesc());
-//                    System.out.println(rowTemplate.getSpec());
-//                    System.out.println(rowTemplate.getRl());
-//                    System.out.println("-----");
-//                }
             }
-            System.out.println("/$ : Total files saved: " + savedFiles);
-            System.out.println("/$ : Not saved sheets/files: ");
-
-            for (Map.Entry entry : notSavedFiles.entrySet()) {
-                System.out.println(entry.getKey() + " | file name: " + entry.getValue());
-            }
-
             fileInputStream.close();
+
+            System.out.println("/$ : Total files saved: " + savedFiles);
+
+            if (!notSavedFiles.isEmpty()) {
+                System.out.println("/$ : Not saved sheets/files: ");
+                for (Map.Entry entry : notSavedFiles.entrySet()) {
+                    System.out.println(entry.getKey() + " | file name: " + entry.getValue());
+                }
+            }
         }
     }
 
