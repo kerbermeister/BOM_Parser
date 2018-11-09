@@ -35,6 +35,7 @@ public class PatternsToIgnore {
         ignoreList.add("insert");
         ignoreList.add("bar");
         ignoreList.add("matched");
+        ignoreList.add("screw");
     }
 
     public List<String> getIgnoreList() {

@@ -75,9 +75,16 @@ public class XlsxConverter {
                 Sheet xssfSheet = sheetIterator.next();
                 Iterator<Row> rowIterator = xssfSheet.rowIterator();
                 Sheet hssfSheet = hssfWorkbook.createSheet(xssfSheet.getSheetName());
-                int rowNum = 0;
+                int rowNum = xssfSheet.getFirstRowNum();
 
-
+                if (rowNum > 0) {
+                    for (int i = 0; i < rowNum; i++) {
+                        Row row = hssfSheet.createRow(i);
+                        for (int k = 0; k < maxColumnNum; k++) {
+                            row.createCell(k).setCellType(CellType.STRING);
+                        }
+                    }
+                }
 
                 while (rowIterator.hasNext()) {
                     Row xssfRow = rowIterator.next();
@@ -87,7 +94,14 @@ public class XlsxConverter {
                     if (rowNum >= maxRowNum) {
                         break;
                     }
-                    int cellNum = 0;
+                    int cellNum = (int) xssfRow.getFirstCellNum();
+
+                    if (cellNum > 0) {
+                        for (int j = 0; j < cellNum; j++) {
+                            hssfRow.createCell(j).setCellType(CellType.STRING);
+                        }
+                    }
+
                     while (cellIterator.hasNext()) {
                         Cell cell = cellIterator.next();
                         cell.setCellType(CellType.STRING);
