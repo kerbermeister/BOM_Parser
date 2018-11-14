@@ -36,6 +36,11 @@ public abstract class AbstractController {
 
     public void launch() throws IOException, InvalidFormatException {
         String processedFolder = convertFilesToXls(config.getFilePath());
+
+        if (processedFolder == null) {
+            return;
+        }
+
         File[] convertedFiles;
         try {
             convertedFiles = getConvertedFilesList(processedFolder);
@@ -59,11 +64,11 @@ public abstract class AbstractController {
                 try {
                     rowTemplateArrayList = processFile(excelReader, matcher, i);
                 } catch (IllegalSheetIndexException e) {
-                    System.out.println("/$ : ERROR!!! Sheet #(" + i + ") does not exist!!!");
+                    System.out.println("/$ : [ERROR!!!] Sheet #(" + i + ") does not exist!!!");
                     return;
                 }
 
-                System.out.println("#" + i + " sheet from file " + file.getName() + " processed, total parts found: " + rowTemplateArrayList.size());
+                System.out.println("/$ : [INFO] #" + i + " sheet from file " + file.getName() + " processed, total parts found: " + rowTemplateArrayList.size());
 
                 Workbook workbook = new HSSFWorkbook();
 
@@ -76,23 +81,23 @@ public abstract class AbstractController {
                 try {
                     fileSaver.save(rowTemplateArrayList, processedFolder);
                     savedFiles++;
-                    System.out.println("/$ : Sheet with parts has name: " + excelReader.getSheetName(i));
+                    System.out.println("/$ : [INFO] Sheet with parts has name: " + excelReader.getSheetName(i));
                     System.out.println("------------------------------------------------------------------------");
                 } catch (EmptyFileToSaveException e) {
                     notSavedFilesList.add("'" + excelReader.getSheetName(i) + "'" + " | file name: " + file.getName());
                     notSavedFiles++;
-                    System.out.println("/$ : WARNING!!! File " + file.getName() + " has a sheet #(" + i + ") '" + excelReader.getSheetName(i) + "' without any founds, file has not been saved");
+                    System.out.println("/$ : [WARNING!!!] File " + file.getName() + " has a sheet #(" + i + ") '" + excelReader.getSheetName(i) + "' without any founds, file has not been saved");
                     System.out.println("------------------------------------------------------------------------");
                 }
 
             }
             fileInputStream.close();
 
-            System.out.println("/$ : Total files saved: " + savedFiles);
-            System.out.println("/$ : Total files NOT saved: " + notSavedFiles);
+            System.out.println("/$ : [INFO] Total files saved: " + savedFiles);
+            System.out.println("/$ : [INFO] Total files NOT saved: " + notSavedFiles);
         }
         if (!notSavedFilesList.isEmpty()) {
-            System.out.println("/$ : Not saved sheets/files: ");
+            System.out.println("/$ : [INFO] Not saved sheets/files: ");
             for (String str : notSavedFilesList) {
                 System.out.println(str);
             }
