@@ -5,6 +5,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import project.XlsxConverter.Exceptions.InvalidPathException;
+import project.XlsxConverter.Exceptions.NativeException;
 
 import java.io.*;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ public class XlsxConverter {
     public static final int maxRowNum = 1024;
     private static final String processedDirectoryName = "\\done";
 
-    public static String convertFiles(String directoryPath) throws IOException, InvalidFormatException, InvalidPathException {
+    public static String convertFiles(String directoryPath) throws IOException, InvalidFormatException, InvalidPathException, NativeException {
         long startTime = System.currentTimeMillis();
 
         File directory = new File(directoryPath);
@@ -31,6 +32,7 @@ public class XlsxConverter {
             System.out.println("/$ : [INFO] the new directory for processed files has been created");
         } else {
             System.out.println("/$ : [ERROR!!!] the directory for processed files could not be created");
+            throw new NativeException();
         }
 
         File[] files = directory.listFiles();
@@ -57,7 +59,7 @@ public class XlsxConverter {
                 fileInputStream.close();
             }
 
-            System.out.println("/$ : [INFO] converting " + file.getName() + "...");
+            System.out.println("/$ : [CONVERTING] converting " + file.getName() + "...");
 
             HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
             Iterator<Sheet> sheetIterator = workbook.sheetIterator();

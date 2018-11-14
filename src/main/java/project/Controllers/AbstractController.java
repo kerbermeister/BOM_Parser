@@ -15,6 +15,7 @@ import project.Saver.Exceptions.EmptyFileToSaveException;
 import project.Saver.FileSaver;
 import project.XlsxConverter.Exceptions.IllegalSheetIndexException;
 import project.XlsxConverter.Exceptions.InvalidPathException;
+import project.XlsxConverter.Exceptions.NativeException;
 import project.XlsxConverter.XlsxConverter;
 
 import java.io.File;
@@ -35,7 +36,13 @@ public abstract class AbstractController {
     }
 
     public void launch() throws IOException, InvalidFormatException {
-        String processedFolder = convertFilesToXls(config.getFilePath());
+        String processedFolder;
+        try {
+            processedFolder = convertFilesToXls(config.getFilePath());
+        } catch (NativeException e) {
+            e.printMsg();
+            return;
+        }
 
         if (processedFolder == null) {
             return;
@@ -108,7 +115,7 @@ public abstract class AbstractController {
 
     abstract ArrayList<RowTemplate> processFile(ExcelReader excelReader, Matcher matcher, int sheetIndex) throws IllegalSheetIndexException;
 
-    private String convertFilesToXls(String path) throws IOException, InvalidFormatException {
+    private String convertFilesToXls(String path) throws IOException, InvalidFormatException, NativeException {
         try {
             return XlsxConverter.convertFiles(path);
         } catch (InvalidPathException e) {
