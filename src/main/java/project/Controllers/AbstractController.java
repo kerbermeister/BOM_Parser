@@ -40,7 +40,7 @@ public abstract class AbstractController {
         try {
             convertedFiles = getConvertedFilesList(processedFolder);
         } catch (EmptyProcessedFolderException e) {
-            System.out.println("/$ : ERROR!!! No any files found for processing...");
+            e.printMsg();
             return;
         }
 
@@ -105,7 +105,7 @@ public abstract class AbstractController {
         try {
             return XlsxConverter.convertFiles(path);
         } catch (InvalidPathException e) {
-            System.out.println("/$ : ERROR!!! Provided path does not exist!");
+            e.printMsg();
             return null;
         }
     }
@@ -116,6 +116,6 @@ public abstract class AbstractController {
         if (folder.listFiles().length == 0)
             throw new EmptyProcessedFolderException();
         else
-         return folder.listFiles();
+            return folder.listFiles();
     }
 }

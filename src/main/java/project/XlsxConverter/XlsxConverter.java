@@ -31,7 +31,6 @@ public class XlsxConverter {
             System.out.println("/$ : the new directory for processed files has been created");
         } else {
             System.out.println("/$ : ERROR!!! the directory for processed files could not be created");
-
         }
 
         File[] files = directory.listFiles();
