@@ -131,6 +131,7 @@ public class XlsxConverter {
         System.out.println("/$ : [INFO] Convertation has finished, total time is : " + totalWorkingTime + " ms");
         System.out.println("========================================================================");
         System.out.println();
+        System.out.println();
         return directoryPath + processedDirectoryName + "\\";
     }
 

@@ -68,7 +68,7 @@ public abstract class AbstractController {
                     return;
                 }
 
-                System.out.println("/$ : [INFO] #" + i + " sheet from file " + file.getName() + " processed, total parts found: " + rowTemplateArrayList.size());
+                System.out.println("/$ : [PROCESSING] #" + i + " sheet from file " + file.getName() + " processed, total parts found: " + rowTemplateArrayList.size());
 
                 Workbook workbook = new HSSFWorkbook();
 
@@ -92,16 +92,18 @@ public abstract class AbstractController {
 
             }
             fileInputStream.close();
-
-            System.out.println("/$ : [INFO] Total files saved: " + savedFiles);
-            System.out.println("/$ : [INFO] Total files NOT saved: " + notSavedFiles);
         }
+        System.out.println("/$ : [INFO] Total files saved: " + savedFiles);
+        System.out.println("/$ : [INFO] Total files NOT saved: " + notSavedFiles);
+
         if (!notSavedFilesList.isEmpty()) {
             System.out.println("/$ : [INFO] Not saved sheets/files: ");
+            System.out.println();
             for (String str : notSavedFilesList) {
                 System.out.println(str);
             }
         }
+        System.out.println();
     }
 
     abstract ArrayList<RowTemplate> processFile(ExcelReader excelReader, Matcher matcher, int sheetIndex) throws IllegalSheetIndexException;
